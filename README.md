@@ -14,6 +14,25 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Deploy on Openshift
+
+Run the following comands:
+
+```bash
+# Create a project
+oc new-project yaml-online
+# Create and start a binary build
+oc new-build nginx --name=frontend -l app=yaml-online --binary=true -n=yaml-online  -o yaml | oc apply -f -
+ng build
+cp nginx.conf ./dist/yaml-online/
+oc start-build frontend --from-dir=./dist/yaml-online/ -n=yaml-online
+# Create deploy and rollout
+oc new-app frontend -l app=yaml-online -n=yaml-online 
+oc rollout latest dc/frontend -n=yaml-online
+# Expose app
+oc expose svc/frontend --port=8080 -l app=yaml-online -o yaml | oc apply -f -
+```
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).

@@ -1,0 +1,17 @@
+<h2>Element Detail</h2>
+<p >
+  ID: {{ getValue(input.data, input.procesar.idField) }}
+</p>
+<p>
+  Name: {{
+    getValue(input.data, input.procesar.nameField)
+  }}
+</p>
+<ngs-code-editor
+  theme="vs-dark"
+  [codeModel]="codeModel"
+  [options]="options">
+</ngs-code-editor>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>

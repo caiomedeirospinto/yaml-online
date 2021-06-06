@@ -1,0 +1,16 @@
+mat-spinner {
+  margin: 20px;
+}
+
+::ng-deep .mat-vertical-stepper-header {
+  pointer-events: none !important;
+}
+
+.form-field-full-width {
+  width: 100%;
+}
+
+.procesar-stepper {
+  max-width: 500px;
+  width: 100%;
+}

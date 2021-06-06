@@ -1,0 +1,1992 @@
+{
+    "kind": "PodList",
+    "apiVersion": "v1",
+    "metadata": {
+      "selfLink": "/api/v1/namespaces/kube-system/pods",
+      "resourceVersion": "100103483"
+    },
+    "items": [
+      {
+        "metadata": {
+          "name": "csi-cinder-controllerplugin-0",
+          "generateName": "csi-cinder-controllerplugin-",
+          "namespace": "kube-system",
+          "selfLink": "/api/v1/namespaces/kube-system/pods/csi-cinder-controllerplugin-0",
+          "uid": "7e21975b-94d3-482c-82b1-cd5aa45784d2",
+          "resourceVersion": "36721",
+          "creationTimestamp": "2021-03-24T14:12:41Z",
+          "labels": {
+            "app": "csi-cinder-controllerplugin",
+            "controller-revision-hash": "csi-cinder-controllerplugin-75f456f6c7",
+            "statefulset.kubernetes.io/pod-name": "csi-cinder-controllerplugin-0"
+          },
+          "annotations": {
+            "k8s.v1.cni.cncf.io/network-status": "[{\n    \"name\": \"\",\n    \"interface\": \"eth0\",\n    \"ips\": [\n        \"10.128.2.7\"\n    ],\n    \"default\": true,\n    \"dns\": {}\n}]",
+            "k8s.v1.cni.cncf.io/networks-status": "[{\n    \"name\": \"\",\n    \"interface\": \"eth0\",\n    \"ips\": [\n        \"10.128.2.7\"\n    ],\n    \"default\": true,\n    \"dns\": {}\n}]"
+          },
+          "ownerReferences": [
+            {
+              "apiVersion": "apps/v1",
+              "kind": "StatefulSet",
+              "name": "csi-cinder-controllerplugin",
+              "uid": "c7c32cc5-d7a7-4ff4-9fb9-2ad263c56652",
+              "controller": true,
+              "blockOwnerDeletion": true
+            }
+          ],
+          "managedFields": [
+            {
+              "manager": "kube-controller-manager",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:12:41Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:metadata":{"f:generateName":{},"f:labels":{".":{},"f:app":{},"f:controller-revision-hash":{},"f:statefulset.kubernetes.io/pod-name":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"c7c32cc5-d7a7-4ff4-9fb9-2ad263c56652\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:containers":{"k:{\"name\":\"cinder-csi-plugin\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"CLOUD_CONFIG\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"CLUSTER_NAME\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"CSI_ENDPOINT\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"NODE_ID\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/etc/config\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/etc/etl\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}}}},"k:{\"name\":\"csi-attacher\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"ADDRESS\"}":{".":{},"f:name":{},"f:value":{}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/var/lib/csi/sockets/pluginproxy/\"}":{".":{},"f:mountPath":{},"f:name":{}}}},"k:{\"name\":\"csi-provisioner\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"ADDRESS\"}":{".":{},"f:name":{},"f:value":{}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/var/lib/csi/sockets/pluginproxy/\"}":{".":{},"f:mountPath":{},"f:name":{}}}},"k:{\"name\":\"csi-resizer\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"ADDRESS\"}":{".":{},"f:name":{},"f:value":{}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/var/lib/csi/sockets/pluginproxy/\"}":{".":{},"f:mountPath":{},"f:name":{}}}},"k:{\"name\":\"csi-snapshotter\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"ADDRESS\"}":{".":{},"f:name":{},"f:value":{}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/var/lib/csi/sockets/pluginproxy/\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:hostname":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:serviceAccount":{},"f:serviceAccountName":{},"f:subdomain":{},"f:terminationGracePeriodSeconds":{},"f:volumes":{".":{},"k:{\"name\":\"etl-ca-volume\"}":{".":{},"f:configMap":{".":{},"f:defaultMode":{},"f:name":{}},"f:name":{}},"k:{\"name\":\"secret-cinderplugin\"}":{".":{},"f:name":{},"f:secret":{".":{},"f:defaultMode":{},"f:secretName":{}}},"k:{\"name\":\"socket-dir\"}":{".":{},"f:emptyDir":{},"f:name":{}}}}}
+            },
+            {
+              "manager": "multus",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:12:47Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:metadata":{"f:annotations":{".":{},"f:k8s.v1.cni.cncf.io/network-status":{},"f:k8s.v1.cni.cncf.io/networks-status":{}}}}
+            },
+            {
+              "manager": "kubelet",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:13:06Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:status":{"f:conditions":{"k:{\"type\":\"ContainersReady\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Initialized\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}}},"f:containerStatuses":{},"f:hostIP":{},"f:phase":{},"f:podIP":{},"f:podIPs":{".":{},"k:{\"ip\":\"10.128.2.7\"}":{".":{},"f:ip":{}}},"f:startTime":{}}}
+            }
+          ]
+        },
+        "spec": {
+          "volumes": [
+            {
+              "name": "socket-dir",
+              "emptyDir": {
+
+              }
+            },
+            {
+              "name": "secret-cinderplugin",
+              "secret": {
+                "secretName": "cloud-config",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "etl-ca-volume",
+              "configMap": {
+                "name": "etl-ca",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "csi-cinder-controller-sa-token-79k2v",
+              "secret": {
+                "secretName": "csi-cinder-controller-sa-token-79k2v",
+                "defaultMode": 420
+              }
+            }
+          ],
+          "containers": [
+            {
+              "name": "csi-attacher",
+              "image": "quay.io/k8scsi/csi-attacher:v2.0.0",
+              "args": [
+                "--csi-address=$(ADDRESS)",
+                "--timeout=3m"
+              ],
+              "env": [
+                {
+                  "name": "ADDRESS",
+                  "value": "/var/lib/csi/sockets/pluginproxy/csi.sock"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/var/lib/csi/sockets/pluginproxy/"
+                },
+                {
+                  "name": "csi-cinder-controller-sa-token-79k2v",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent"
+            },
+            {
+              "name": "csi-provisioner",
+              "image": "quay.io/k8scsi/csi-provisioner:v1.4.0",
+              "args": [
+                "--csi-address=$(ADDRESS)",
+                "--timeout=3m"
+              ],
+              "env": [
+                {
+                  "name": "ADDRESS",
+                  "value": "/var/lib/csi/sockets/pluginproxy/csi.sock"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/var/lib/csi/sockets/pluginproxy/"
+                },
+                {
+                  "name": "csi-cinder-controller-sa-token-79k2v",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent"
+            },
+            {
+              "name": "csi-snapshotter",
+              "image": "quay.io/k8scsi/csi-snapshotter:v1.2.2",
+              "args": [
+                "--csi-address=$(ADDRESS)"
+              ],
+              "env": [
+                {
+                  "name": "ADDRESS",
+                  "value": "/var/lib/csi/sockets/pluginproxy/csi.sock"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/var/lib/csi/sockets/pluginproxy/"
+                },
+                {
+                  "name": "csi-cinder-controller-sa-token-79k2v",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "Always"
+            },
+            {
+              "name": "csi-resizer",
+              "image": "quay.io/k8scsi/csi-resizer:v0.3.0",
+              "args": [
+                "--csi-address=$(ADDRESS)"
+              ],
+              "env": [
+                {
+                  "name": "ADDRESS",
+                  "value": "/var/lib/csi/sockets/pluginproxy/csi.sock"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/var/lib/csi/sockets/pluginproxy/"
+                },
+                {
+                  "name": "csi-cinder-controller-sa-token-79k2v",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent"
+            },
+            {
+              "name": "cinder-csi-plugin",
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "args": [
+                "/bin/cinder-csi-plugin",
+                "--nodeid=$(NODE_ID)",
+                "--endpoint=$(CSI_ENDPOINT)",
+                "--cloud-config=$(CLOUD_CONFIG)",
+                "--cluster=$(CLUSTER_NAME)"
+              ],
+              "env": [
+                {
+                  "name": "NODE_ID",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                },
+                {
+                  "name": "CSI_ENDPOINT",
+                  "value": "unix://csi/csi.sock"
+                },
+                {
+                  "name": "CLOUD_CONFIG",
+                  "value": "/etc/config/cloud.conf"
+                },
+                {
+                  "name": "CLUSTER_NAME",
+                  "value": "kubernetes"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "secret-cinderplugin",
+                  "readOnly": true,
+                  "mountPath": "/etc/config"
+                },
+                {
+                  "name": "etl-ca-volume",
+                  "readOnly": true,
+                  "mountPath": "/etc/etl"
+                },
+                {
+                  "name": "csi-cinder-controller-sa-token-79k2v",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent"
+            }
+          ],
+          "restartPolicy": "Always",
+          "terminationGracePeriodSeconds": 30,
+          "dnsPolicy": "ClusterFirst",
+          "serviceAccountName": "csi-cinder-controller-sa",
+          "serviceAccount": "csi-cinder-controller-sa",
+          "nodeName": "worker-3",
+          "securityContext": {
+
+          },
+          "hostname": "csi-cinder-controllerplugin-0",
+          "subdomain": "csi-cinder-controller-service",
+          "schedulerName": "default-scheduler",
+          "tolerations": [
+            {
+              "key": "node.kubernetes.io/not-ready",
+              "operator": "Exists",
+              "effect": "NoExecute",
+              "tolerationSeconds": 300
+            },
+            {
+              "key": "node.kubernetes.io/unreachable",
+              "operator": "Exists",
+              "effect": "NoExecute",
+              "tolerationSeconds": 300
+            }
+          ],
+          "priority": 0,
+          "enableServiceLinks": true,
+          "preemptionPolicy": "PreemptLowerPriority"
+        },
+        "status": {
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "Initialized",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:41Z"
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:13:06Z"
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:13:06Z"
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:41Z"
+            }
+          ],
+          "hostIP": "192.168.46.111",
+          "podIP": "10.128.2.7",
+          "podIPs": [
+            {
+              "ip": "10.128.2.7"
+            }
+          ],
+          "startTime": "2021-03-24T14:12:41Z",
+          "containerStatuses": [
+            {
+              "name": "cinder-csi-plugin",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:13:06Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "imageID": "docker.io/k8scloudprovider/cinder-csi-plugin@sha256:a5add0b6579508ff40379388b3c5c55174573612c586c44ef9bc2556636f9897",
+              "containerID": "cri-o://e7640bd758d60a072d211c0ff363d89771009cb673b1af52f778a7b71c915efe",
+              "started": true
+            },
+            {
+              "name": "csi-attacher",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:12:52Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "quay.io/k8scsi/csi-attacher:v2.0.0",
+              "imageID": "quay.io/k8scsi/csi-attacher@sha256:d3e2c5fb1d887bed2e6e8f931c65209b16cf7c28b40eaf7812268f9839908790",
+              "containerID": "cri-o://d6d53ac04e375cc2a6921db981ada756b49ebc43bcfeb1992182969c6d02bb19",
+              "started": true
+            },
+            {
+              "name": "csi-provisioner",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:12:58Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "quay.io/k8scsi/csi-provisioner:v1.4.0",
+              "imageID": "quay.io/k8scsi/csi-provisioner@sha256:3a14f801f330d5eacee11f544d2c2c7cc4a733835e25b59887053358108cea69",
+              "containerID": "cri-o://7632f551a741e89175e7451f07688f795a0489a56e6b3900191a46f3421bdc63",
+              "started": true
+            },
+            {
+              "name": "csi-resizer",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:13:05Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "quay.io/k8scsi/csi-resizer:v0.3.0",
+              "imageID": "quay.io/k8scsi/csi-resizer@sha256:eff2d6a215efd9450d90796265fc4d8832a54a3a098df06edae6ff3a5072b08f",
+              "containerID": "cri-o://725df9de78f62b4de8b683caa1f9badecc23dbaaa0a24160675acdad5337c241",
+              "started": true
+            },
+            {
+              "name": "csi-snapshotter",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:13:04Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "quay.io/k8scsi/csi-snapshotter:v1.2.2",
+              "imageID": "quay.io/k8scsi/csi-snapshotter@sha256:fbef4d21ec79c9c5aced2e0e0396b9272e69ffe4cc718c3602ae6a466f682d41",
+              "containerID": "cri-o://b607b2c3aa483a6eb751558e6d24c6abdb3c6a543eaf88e9e1c9a65a211b8f4d",
+              "started": true
+            }
+          ],
+          "qosClass": "BestEffort"
+        }
+      },
+      {
+        "metadata": {
+          "name": "csi-cinder-nodeplugin-bszkz",
+          "generateName": "csi-cinder-nodeplugin-",
+          "namespace": "kube-system",
+          "selfLink": "/api/v1/namespaces/kube-system/pods/csi-cinder-nodeplugin-bszkz",
+          "uid": "f63d536d-0f37-4caf-822a-2bb3edf42985",
+          "resourceVersion": "48837",
+          "creationTimestamp": "2021-03-24T14:12:43Z",
+          "labels": {
+            "app": "csi-cinder-nodeplugin",
+            "controller-revision-hash": "679cd5bd94",
+            "pod-template-generation": "1"
+          },
+          "ownerReferences": [
+            {
+              "apiVersion": "apps/v1",
+              "kind": "DaemonSet",
+              "name": "csi-cinder-nodeplugin",
+              "uid": "c04122f0-2a98-4fe6-8f23-894c35ec0774",
+              "controller": true,
+              "blockOwnerDeletion": true
+            }
+          ],
+          "managedFields": [
+            {
+              "manager": "kube-controller-manager",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:12:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:metadata":{"f:generateName":{},"f:labels":{".":{},"f:app":{},"f:controller-revision-hash":{},"f:pod-template-generation":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"c04122f0-2a98-4fe6-8f23-894c35ec0774\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:affinity":{".":{},"f:nodeAffinity":{".":{},"f:requiredDuringSchedulingIgnoredDuringExecution":{".":{},"f:nodeSelectorTerms":{}}}},"f:containers":{"k:{\"name\":\"cinder-csi-plugin\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"CLOUD_CONFIG\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"CSI_ENDPOINT\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"NODE_ID\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:securityContext":{".":{},"f:allowPrivilegeEscalation":{},"f:capabilities":{".":{},"f:add":{}},"f:privileged":{}},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/dev\"}":{".":{},"f:mountPath":{},"f:mountPropagation":{},"f:name":{}},"k:{\"mountPath\":\"/etc/config\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/etc/etl\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/var/lib/cloud/data\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/var/lib/kubelet\"}":{".":{},"f:mountPath":{},"f:mountPropagation":{},"f:name":{}}}},"k:{\"name\":\"node-driver-registrar\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"ADDRESS\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"DRIVER_REG_SOCK_PATH\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"KUBE_NODE_NAME\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:lifecycle":{".":{},"f:preStop":{".":{},"f:exec":{".":{},"f:command":{}}}},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/registration\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:hostNetwork":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:serviceAccount":{},"f:serviceAccountName":{},"f:terminationGracePeriodSeconds":{},"f:tolerations":{},"f:volumes":{".":{},"k:{\"name\":\"etl-ca-volume\"}":{".":{},"f:configMap":{".":{},"f:defaultMode":{},"f:name":{}},"f:name":{}},"k:{\"name\":\"kubelet-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"pods-cloud-data\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"pods-probe-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"registration-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"secret-cinderplugin\"}":{".":{},"f:name":{},"f:secret":{".":{},"f:defaultMode":{},"f:secretName":{}}},"k:{\"name\":\"socket-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}}}}}
+            },
+            {
+              "manager": "kubelet",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:21:48Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:status":{"f:conditions":{"k:{\"type\":\"ContainersReady\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Initialized\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}}},"f:containerStatuses":{},"f:hostIP":{},"f:phase":{},"f:podIP":{},"f:podIPs":{".":{},"k:{\"ip\":\"192.168.46.187\"}":{".":{},"f:ip":{}}},"f:startTime":{}}}
+            }
+          ]
+        },
+        "spec": {
+          "volumes": [
+            {
+              "name": "socket-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet/plugins/cinder.csi.openstack.org",
+                "type": "DirectoryOrCreate"
+              }
+            },
+            {
+              "name": "registration-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet/plugins_registry/",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "kubelet-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "pods-cloud-data",
+              "hostPath": {
+                "path": "/var/lib/cloud/data",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "pods-probe-dir",
+              "hostPath": {
+                "path": "/dev",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "secret-cinderplugin",
+              "secret": {
+                "secretName": "cloud-config",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "etl-ca-volume",
+              "configMap": {
+                "name": "etl-ca",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "csi-cinder-node-sa-token-td8hp",
+              "secret": {
+                "secretName": "csi-cinder-node-sa-token-td8hp",
+                "defaultMode": 420
+              }
+            }
+          ],
+          "containers": [
+            {
+              "name": "node-driver-registrar",
+              "image": "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0",
+              "args": [
+                "--csi-address=$(ADDRESS)",
+                "--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)"
+              ],
+              "env": [
+                {
+                  "name": "ADDRESS",
+                  "value": "/csi/csi.sock"
+                },
+                {
+                  "name": "DRIVER_REG_SOCK_PATH",
+                  "value": "/var/lib/kubelet/plugins/cinder.csi.openstack.org/csi.sock"
+                },
+                {
+                  "name": "KUBE_NODE_NAME",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "registration-dir",
+                  "mountPath": "/registration"
+                },
+                {
+                  "name": "csi-cinder-node-sa-token-td8hp",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "lifecycle": {
+                "preStop": {
+                  "exec": {
+                    "command": [
+                      "/bin/sh",
+                      "-c",
+                      "rm -rf /registration/cinder.csi.openstack.org /registration/cinder.csi.openstack.org-reg.sock"
+                    ]
+                  }
+                }
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent"
+            },
+            {
+              "name": "cinder-csi-plugin",
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "args": [
+                "/bin/cinder-csi-plugin",
+                "--nodeid=$(NODE_ID)",
+                "--endpoint=$(CSI_ENDPOINT)",
+                "--cloud-config=$(CLOUD_CONFIG)"
+              ],
+              "env": [
+                {
+                  "name": "NODE_ID",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                },
+                {
+                  "name": "CSI_ENDPOINT",
+                  "value": "unix://csi/csi.sock"
+                },
+                {
+                  "name": "CLOUD_CONFIG",
+                  "value": "/etc/config/cloud.conf"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "kubelet-dir",
+                  "mountPath": "/var/lib/kubelet",
+                  "mountPropagation": "Bidirectional"
+                },
+                {
+                  "name": "pods-cloud-data",
+                  "readOnly": true,
+                  "mountPath": "/var/lib/cloud/data"
+                },
+                {
+                  "name": "pods-probe-dir",
+                  "mountPath": "/dev",
+                  "mountPropagation": "HostToContainer"
+                },
+                {
+                  "name": "secret-cinderplugin",
+                  "readOnly": true,
+                  "mountPath": "/etc/config"
+                },
+                {
+                  "name": "etl-ca-volume",
+                  "readOnly": true,
+                  "mountPath": "/etc/etl"
+                },
+                {
+                  "name": "csi-cinder-node-sa-token-td8hp",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent",
+              "securityContext": {
+                "capabilities": {
+                  "add": [
+                    "SYS_ADMIN"
+                  ]
+                },
+                "privileged": true,
+                "allowPrivilegeEscalation": true
+              }
+            }
+          ],
+          "restartPolicy": "Always",
+          "terminationGracePeriodSeconds": 30,
+          "dnsPolicy": "ClusterFirst",
+          "serviceAccountName": "csi-cinder-node-sa",
+          "serviceAccount": "csi-cinder-node-sa",
+          "nodeName": "worker-1",
+          "hostNetwork": true,
+          "securityContext": {
+
+          },
+          "affinity": {
+            "nodeAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": {
+                "nodeSelectorTerms": [
+                  {
+                    "matchFields": [
+                      {
+                        "key": "metadata.name",
+                        "operator": "In",
+                        "values": [
+                          "worker-1"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "schedulerName": "default-scheduler",
+          "tolerations": [
+            {
+              "key": "node.kubernetes.io/not-ready",
+              "operator": "Exists",
+              "effect": "NoExecute"
+            },
+            {
+              "key": "node.kubernetes.io/unreachable",
+              "operator": "Exists",
+              "effect": "NoExecute"
+            },
+            {
+              "key": "node.kubernetes.io/disk-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/memory-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/pid-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/unschedulable",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/network-unavailable",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            }
+          ],
+          "priority": 0,
+          "enableServiceLinks": true,
+          "preemptionPolicy": "PreemptLowerPriority"
+        },
+        "status": {
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "Initialized",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:43Z"
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:21:48Z"
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:21:48Z"
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:43Z"
+            }
+          ],
+          "hostIP": "192.168.46.187",
+          "podIP": "192.168.46.187",
+          "podIPs": [
+            {
+              "ip": "192.168.46.187"
+            }
+          ],
+          "startTime": "2021-03-24T14:12:43Z",
+          "containerStatuses": [
+            {
+              "name": "cinder-csi-plugin",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:21:48Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "imageID": "docker.io/k8scloudprovider/cinder-csi-plugin@sha256:a5add0b6579508ff40379388b3c5c55174573612c586c44ef9bc2556636f9897",
+              "containerID": "cri-o://216c056ef4928d67f730e1aed8f53f75aba6fc6b8c7226f85088c85ef2ac9471",
+              "started": true
+            },
+            {
+              "name": "node-driver-registrar",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:21:48Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0",
+              "imageID": "quay.io/k8scsi/csi-node-driver-registrar@sha256:13daf82fb99e951a4bff8ae5fc7c17c3a8fe7130be6400990d8f6076c32d4599",
+              "containerID": "cri-o://5d7e2d60aa185e4fa5304c51820ff65eb71e551ffbbc5425f9504f0b1d806b83",
+              "started": true
+            }
+          ],
+          "qosClass": "BestEffort"
+        }
+      },
+      {
+        "metadata": {
+          "name": "csi-cinder-nodeplugin-fd4qb",
+          "generateName": "csi-cinder-nodeplugin-",
+          "namespace": "kube-system",
+          "selfLink": "/api/v1/namespaces/kube-system/pods/csi-cinder-nodeplugin-fd4qb",
+          "uid": "b9eb52b8-cacd-42e4-83e2-b3d45f9acdd8",
+          "resourceVersion": "38449",
+          "creationTimestamp": "2021-03-24T14:12:43Z",
+          "labels": {
+            "app": "csi-cinder-nodeplugin",
+            "controller-revision-hash": "679cd5bd94",
+            "pod-template-generation": "1"
+          },
+          "ownerReferences": [
+            {
+              "apiVersion": "apps/v1",
+              "kind": "DaemonSet",
+              "name": "csi-cinder-nodeplugin",
+              "uid": "c04122f0-2a98-4fe6-8f23-894c35ec0774",
+              "controller": true,
+              "blockOwnerDeletion": true
+            }
+          ],
+          "managedFields": [
+            {
+              "manager": "kube-controller-manager",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:12:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:metadata":{"f:generateName":{},"f:labels":{".":{},"f:app":{},"f:controller-revision-hash":{},"f:pod-template-generation":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"c04122f0-2a98-4fe6-8f23-894c35ec0774\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:affinity":{".":{},"f:nodeAffinity":{".":{},"f:requiredDuringSchedulingIgnoredDuringExecution":{".":{},"f:nodeSelectorTerms":{}}}},"f:containers":{"k:{\"name\":\"cinder-csi-plugin\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"CLOUD_CONFIG\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"CSI_ENDPOINT\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"NODE_ID\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:securityContext":{".":{},"f:allowPrivilegeEscalation":{},"f:capabilities":{".":{},"f:add":{}},"f:privileged":{}},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/dev\"}":{".":{},"f:mountPath":{},"f:mountPropagation":{},"f:name":{}},"k:{\"mountPath\":\"/etc/config\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/etc/etl\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/var/lib/cloud/data\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/var/lib/kubelet\"}":{".":{},"f:mountPath":{},"f:mountPropagation":{},"f:name":{}}}},"k:{\"name\":\"node-driver-registrar\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"ADDRESS\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"DRIVER_REG_SOCK_PATH\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"KUBE_NODE_NAME\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:lifecycle":{".":{},"f:preStop":{".":{},"f:exec":{".":{},"f:command":{}}}},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/registration\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:hostNetwork":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:serviceAccount":{},"f:serviceAccountName":{},"f:terminationGracePeriodSeconds":{},"f:tolerations":{},"f:volumes":{".":{},"k:{\"name\":\"etl-ca-volume\"}":{".":{},"f:configMap":{".":{},"f:defaultMode":{},"f:name":{}},"f:name":{}},"k:{\"name\":\"kubelet-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"pods-cloud-data\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"pods-probe-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"registration-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"secret-cinderplugin\"}":{".":{},"f:name":{},"f:secret":{".":{},"f:defaultMode":{},"f:secretName":{}}},"k:{\"name\":\"socket-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}}}}}
+            },
+            {
+              "manager": "kubelet",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:14:01Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:status":{"f:conditions":{"k:{\"type\":\"ContainersReady\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Initialized\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}}},"f:containerStatuses":{},"f:hostIP":{},"f:phase":{},"f:podIP":{},"f:podIPs":{".":{},"k:{\"ip\":\"192.168.46.210\"}":{".":{},"f:ip":{}}},"f:startTime":{}}}
+            }
+          ]
+        },
+        "spec": {
+          "volumes": [
+            {
+              "name": "socket-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet/plugins/cinder.csi.openstack.org",
+                "type": "DirectoryOrCreate"
+              }
+            },
+            {
+              "name": "registration-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet/plugins_registry/",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "kubelet-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "pods-cloud-data",
+              "hostPath": {
+                "path": "/var/lib/cloud/data",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "pods-probe-dir",
+              "hostPath": {
+                "path": "/dev",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "secret-cinderplugin",
+              "secret": {
+                "secretName": "cloud-config",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "etl-ca-volume",
+              "configMap": {
+                "name": "etl-ca",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "csi-cinder-node-sa-token-td8hp",
+              "secret": {
+                "secretName": "csi-cinder-node-sa-token-td8hp",
+                "defaultMode": 420
+              }
+            }
+          ],
+          "containers": [
+            {
+              "name": "node-driver-registrar",
+              "image": "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0",
+              "args": [
+                "--csi-address=$(ADDRESS)",
+                "--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)"
+              ],
+              "env": [
+                {
+                  "name": "ADDRESS",
+                  "value": "/csi/csi.sock"
+                },
+                {
+                  "name": "DRIVER_REG_SOCK_PATH",
+                  "value": "/var/lib/kubelet/plugins/cinder.csi.openstack.org/csi.sock"
+                },
+                {
+                  "name": "KUBE_NODE_NAME",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "registration-dir",
+                  "mountPath": "/registration"
+                },
+                {
+                  "name": "csi-cinder-node-sa-token-td8hp",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "lifecycle": {
+                "preStop": {
+                  "exec": {
+                    "command": [
+                      "/bin/sh",
+                      "-c",
+                      "rm -rf /registration/cinder.csi.openstack.org /registration/cinder.csi.openstack.org-reg.sock"
+                    ]
+                  }
+                }
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent"
+            },
+            {
+              "name": "cinder-csi-plugin",
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "args": [
+                "/bin/cinder-csi-plugin",
+                "--nodeid=$(NODE_ID)",
+                "--endpoint=$(CSI_ENDPOINT)",
+                "--cloud-config=$(CLOUD_CONFIG)"
+              ],
+              "env": [
+                {
+                  "name": "NODE_ID",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                },
+                {
+                  "name": "CSI_ENDPOINT",
+                  "value": "unix://csi/csi.sock"
+                },
+                {
+                  "name": "CLOUD_CONFIG",
+                  "value": "/etc/config/cloud.conf"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "kubelet-dir",
+                  "mountPath": "/var/lib/kubelet",
+                  "mountPropagation": "Bidirectional"
+                },
+                {
+                  "name": "pods-cloud-data",
+                  "readOnly": true,
+                  "mountPath": "/var/lib/cloud/data"
+                },
+                {
+                  "name": "pods-probe-dir",
+                  "mountPath": "/dev",
+                  "mountPropagation": "HostToContainer"
+                },
+                {
+                  "name": "secret-cinderplugin",
+                  "readOnly": true,
+                  "mountPath": "/etc/config"
+                },
+                {
+                  "name": "etl-ca-volume",
+                  "readOnly": true,
+                  "mountPath": "/etc/etl"
+                },
+                {
+                  "name": "csi-cinder-node-sa-token-td8hp",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent",
+              "securityContext": {
+                "capabilities": {
+                  "add": [
+                    "SYS_ADMIN"
+                  ]
+                },
+                "privileged": true,
+                "allowPrivilegeEscalation": true
+              }
+            }
+          ],
+          "restartPolicy": "Always",
+          "terminationGracePeriodSeconds": 30,
+          "dnsPolicy": "ClusterFirst",
+          "serviceAccountName": "csi-cinder-node-sa",
+          "serviceAccount": "csi-cinder-node-sa",
+          "nodeName": "worker-0",
+          "hostNetwork": true,
+          "securityContext": {
+
+          },
+          "affinity": {
+            "nodeAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": {
+                "nodeSelectorTerms": [
+                  {
+                    "matchFields": [
+                      {
+                        "key": "metadata.name",
+                        "operator": "In",
+                        "values": [
+                          "worker-0"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "schedulerName": "default-scheduler",
+          "tolerations": [
+            {
+              "key": "node.kubernetes.io/not-ready",
+              "operator": "Exists",
+              "effect": "NoExecute"
+            },
+            {
+              "key": "node.kubernetes.io/unreachable",
+              "operator": "Exists",
+              "effect": "NoExecute"
+            },
+            {
+              "key": "node.kubernetes.io/disk-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/memory-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/pid-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/unschedulable",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/network-unavailable",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            }
+          ],
+          "priority": 0,
+          "enableServiceLinks": true,
+          "preemptionPolicy": "PreemptLowerPriority"
+        },
+        "status": {
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "Initialized",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:43Z"
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:14:01Z"
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:14:01Z"
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:43Z"
+            }
+          ],
+          "hostIP": "192.168.46.210",
+          "podIP": "192.168.46.210",
+          "podIPs": [
+            {
+              "ip": "192.168.46.210"
+            }
+          ],
+          "startTime": "2021-03-24T14:12:43Z",
+          "containerStatuses": [
+            {
+              "name": "cinder-csi-plugin",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:14:01Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "imageID": "docker.io/k8scloudprovider/cinder-csi-plugin@sha256:a5add0b6579508ff40379388b3c5c55174573612c586c44ef9bc2556636f9897",
+              "containerID": "cri-o://d24738dd0a72481ca3440f3c028c2533ba17bbd6757870a6fbb95ea6ec3b4bd1",
+              "started": true
+            },
+            {
+              "name": "node-driver-registrar",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:14:01Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0",
+              "imageID": "quay.io/k8scsi/csi-node-driver-registrar@sha256:13daf82fb99e951a4bff8ae5fc7c17c3a8fe7130be6400990d8f6076c32d4599",
+              "containerID": "cri-o://cc6b5e79b28685736981a292747ceaef01e2921543deeadb72521411468a79b2",
+              "started": true
+            }
+          ],
+          "qosClass": "BestEffort"
+        }
+      },
+      {
+        "metadata": {
+          "name": "csi-cinder-nodeplugin-xxghg",
+          "generateName": "csi-cinder-nodeplugin-",
+          "namespace": "kube-system",
+          "selfLink": "/api/v1/namespaces/kube-system/pods/csi-cinder-nodeplugin-xxghg",
+          "uid": "082aef49-b3d6-45d2-b1f0-e55f7a5537e2",
+          "resourceVersion": "45442",
+          "creationTimestamp": "2021-03-24T14:12:43Z",
+          "labels": {
+            "app": "csi-cinder-nodeplugin",
+            "controller-revision-hash": "679cd5bd94",
+            "pod-template-generation": "1"
+          },
+          "ownerReferences": [
+            {
+              "apiVersion": "apps/v1",
+              "kind": "DaemonSet",
+              "name": "csi-cinder-nodeplugin",
+              "uid": "c04122f0-2a98-4fe6-8f23-894c35ec0774",
+              "controller": true,
+              "blockOwnerDeletion": true
+            }
+          ],
+          "managedFields": [
+            {
+              "manager": "kube-controller-manager",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:12:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:metadata":{"f:generateName":{},"f:labels":{".":{},"f:app":{},"f:controller-revision-hash":{},"f:pod-template-generation":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"c04122f0-2a98-4fe6-8f23-894c35ec0774\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:affinity":{".":{},"f:nodeAffinity":{".":{},"f:requiredDuringSchedulingIgnoredDuringExecution":{".":{},"f:nodeSelectorTerms":{}}}},"f:containers":{"k:{\"name\":\"cinder-csi-plugin\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"CLOUD_CONFIG\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"CSI_ENDPOINT\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"NODE_ID\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:securityContext":{".":{},"f:allowPrivilegeEscalation":{},"f:capabilities":{".":{},"f:add":{}},"f:privileged":{}},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/dev\"}":{".":{},"f:mountPath":{},"f:mountPropagation":{},"f:name":{}},"k:{\"mountPath\":\"/etc/config\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/etc/etl\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/var/lib/cloud/data\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/var/lib/kubelet\"}":{".":{},"f:mountPath":{},"f:mountPropagation":{},"f:name":{}}}},"k:{\"name\":\"node-driver-registrar\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"ADDRESS\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"DRIVER_REG_SOCK_PATH\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"KUBE_NODE_NAME\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:lifecycle":{".":{},"f:preStop":{".":{},"f:exec":{".":{},"f:command":{}}}},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/registration\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:hostNetwork":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:serviceAccount":{},"f:serviceAccountName":{},"f:terminationGracePeriodSeconds":{},"f:tolerations":{},"f:volumes":{".":{},"k:{\"name\":\"etl-ca-volume\"}":{".":{},"f:configMap":{".":{},"f:defaultMode":{},"f:name":{}},"f:name":{}},"k:{\"name\":\"kubelet-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"pods-cloud-data\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"pods-probe-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"registration-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"secret-cinderplugin\"}":{".":{},"f:name":{},"f:secret":{".":{},"f:defaultMode":{},"f:secretName":{}}},"k:{\"name\":\"socket-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}}}}}
+            },
+            {
+              "manager": "kubelet",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:18:50Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:status":{"f:conditions":{"k:{\"type\":\"ContainersReady\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Initialized\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}}},"f:containerStatuses":{},"f:hostIP":{},"f:phase":{},"f:podIP":{},"f:podIPs":{".":{},"k:{\"ip\":\"192.168.46.175\"}":{".":{},"f:ip":{}}},"f:startTime":{}}}
+            }
+          ]
+        },
+        "spec": {
+          "volumes": [
+            {
+              "name": "socket-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet/plugins/cinder.csi.openstack.org",
+                "type": "DirectoryOrCreate"
+              }
+            },
+            {
+              "name": "registration-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet/plugins_registry/",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "kubelet-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "pods-cloud-data",
+              "hostPath": {
+                "path": "/var/lib/cloud/data",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "pods-probe-dir",
+              "hostPath": {
+                "path": "/dev",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "secret-cinderplugin",
+              "secret": {
+                "secretName": "cloud-config",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "etl-ca-volume",
+              "configMap": {
+                "name": "etl-ca",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "csi-cinder-node-sa-token-td8hp",
+              "secret": {
+                "secretName": "csi-cinder-node-sa-token-td8hp",
+                "defaultMode": 420
+              }
+            }
+          ],
+          "containers": [
+            {
+              "name": "node-driver-registrar",
+              "image": "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0",
+              "args": [
+                "--csi-address=$(ADDRESS)",
+                "--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)"
+              ],
+              "env": [
+                {
+                  "name": "ADDRESS",
+                  "value": "/csi/csi.sock"
+                },
+                {
+                  "name": "DRIVER_REG_SOCK_PATH",
+                  "value": "/var/lib/kubelet/plugins/cinder.csi.openstack.org/csi.sock"
+                },
+                {
+                  "name": "KUBE_NODE_NAME",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "registration-dir",
+                  "mountPath": "/registration"
+                },
+                {
+                  "name": "csi-cinder-node-sa-token-td8hp",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "lifecycle": {
+                "preStop": {
+                  "exec": {
+                    "command": [
+                      "/bin/sh",
+                      "-c",
+                      "rm -rf /registration/cinder.csi.openstack.org /registration/cinder.csi.openstack.org-reg.sock"
+                    ]
+                  }
+                }
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent"
+            },
+            {
+              "name": "cinder-csi-plugin",
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "args": [
+                "/bin/cinder-csi-plugin",
+                "--nodeid=$(NODE_ID)",
+                "--endpoint=$(CSI_ENDPOINT)",
+                "--cloud-config=$(CLOUD_CONFIG)"
+              ],
+              "env": [
+                {
+                  "name": "NODE_ID",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                },
+                {
+                  "name": "CSI_ENDPOINT",
+                  "value": "unix://csi/csi.sock"
+                },
+                {
+                  "name": "CLOUD_CONFIG",
+                  "value": "/etc/config/cloud.conf"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "kubelet-dir",
+                  "mountPath": "/var/lib/kubelet",
+                  "mountPropagation": "Bidirectional"
+                },
+                {
+                  "name": "pods-cloud-data",
+                  "readOnly": true,
+                  "mountPath": "/var/lib/cloud/data"
+                },
+                {
+                  "name": "pods-probe-dir",
+                  "mountPath": "/dev",
+                  "mountPropagation": "HostToContainer"
+                },
+                {
+                  "name": "secret-cinderplugin",
+                  "readOnly": true,
+                  "mountPath": "/etc/config"
+                },
+                {
+                  "name": "etl-ca-volume",
+                  "readOnly": true,
+                  "mountPath": "/etc/etl"
+                },
+                {
+                  "name": "csi-cinder-node-sa-token-td8hp",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent",
+              "securityContext": {
+                "capabilities": {
+                  "add": [
+                    "SYS_ADMIN"
+                  ]
+                },
+                "privileged": true,
+                "allowPrivilegeEscalation": true
+              }
+            }
+          ],
+          "restartPolicy": "Always",
+          "terminationGracePeriodSeconds": 30,
+          "dnsPolicy": "ClusterFirst",
+          "serviceAccountName": "csi-cinder-node-sa",
+          "serviceAccount": "csi-cinder-node-sa",
+          "nodeName": "worker-2",
+          "hostNetwork": true,
+          "securityContext": {
+
+          },
+          "affinity": {
+            "nodeAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": {
+                "nodeSelectorTerms": [
+                  {
+                    "matchFields": [
+                      {
+                        "key": "metadata.name",
+                        "operator": "In",
+                        "values": [
+                          "worker-2"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "schedulerName": "default-scheduler",
+          "tolerations": [
+            {
+              "key": "node.kubernetes.io/not-ready",
+              "operator": "Exists",
+              "effect": "NoExecute"
+            },
+            {
+              "key": "node.kubernetes.io/unreachable",
+              "operator": "Exists",
+              "effect": "NoExecute"
+            },
+            {
+              "key": "node.kubernetes.io/disk-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/memory-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/pid-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/unschedulable",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/network-unavailable",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            }
+          ],
+          "priority": 0,
+          "enableServiceLinks": true,
+          "preemptionPolicy": "PreemptLowerPriority"
+        },
+        "status": {
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "Initialized",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:43Z"
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:18:50Z"
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:18:50Z"
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:43Z"
+            }
+          ],
+          "hostIP": "192.168.46.175",
+          "podIP": "192.168.46.175",
+          "podIPs": [
+            {
+              "ip": "192.168.46.175"
+            }
+          ],
+          "startTime": "2021-03-24T14:12:43Z",
+          "containerStatuses": [
+            {
+              "name": "cinder-csi-plugin",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:18:50Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "imageID": "docker.io/k8scloudprovider/cinder-csi-plugin@sha256:a5add0b6579508ff40379388b3c5c55174573612c586c44ef9bc2556636f9897",
+              "containerID": "cri-o://75aac20cc9a2342a6c87f8e870e70ef8303914dee62340f1abc7520fde107396",
+              "started": true
+            },
+            {
+              "name": "node-driver-registrar",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:18:49Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0",
+              "imageID": "quay.io/k8scsi/csi-node-driver-registrar@sha256:13daf82fb99e951a4bff8ae5fc7c17c3a8fe7130be6400990d8f6076c32d4599",
+              "containerID": "cri-o://f4c4cda9a83c49def91387d0a114a0925b5f808efe8b74c9327773ff6bab5f73",
+              "started": true
+            }
+          ],
+          "qosClass": "BestEffort"
+        }
+      },
+      {
+        "metadata": {
+          "name": "csi-cinder-nodeplugin-z6vr4",
+          "generateName": "csi-cinder-nodeplugin-",
+          "namespace": "kube-system",
+          "selfLink": "/api/v1/namespaces/kube-system/pods/csi-cinder-nodeplugin-z6vr4",
+          "uid": "5f04205f-560d-4ed0-ad82-3e5fe1b92f1b",
+          "resourceVersion": "36650",
+          "creationTimestamp": "2021-03-24T14:12:43Z",
+          "labels": {
+            "app": "csi-cinder-nodeplugin",
+            "controller-revision-hash": "679cd5bd94",
+            "pod-template-generation": "1"
+          },
+          "ownerReferences": [
+            {
+              "apiVersion": "apps/v1",
+              "kind": "DaemonSet",
+              "name": "csi-cinder-nodeplugin",
+              "uid": "c04122f0-2a98-4fe6-8f23-894c35ec0774",
+              "controller": true,
+              "blockOwnerDeletion": true
+            }
+          ],
+          "managedFields": [
+            {
+              "manager": "kube-controller-manager",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:12:43Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:metadata":{"f:generateName":{},"f:labels":{".":{},"f:app":{},"f:controller-revision-hash":{},"f:pod-template-generation":{}},"f:ownerReferences":{".":{},"k:{\"uid\":\"c04122f0-2a98-4fe6-8f23-894c35ec0774\"}":{".":{},"f:apiVersion":{},"f:blockOwnerDeletion":{},"f:controller":{},"f:kind":{},"f:name":{},"f:uid":{}}}},"f:spec":{"f:affinity":{".":{},"f:nodeAffinity":{".":{},"f:requiredDuringSchedulingIgnoredDuringExecution":{".":{},"f:nodeSelectorTerms":{}}}},"f:containers":{"k:{\"name\":\"cinder-csi-plugin\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"CLOUD_CONFIG\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"CSI_ENDPOINT\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"NODE_ID\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:name":{},"f:resources":{},"f:securityContext":{".":{},"f:allowPrivilegeEscalation":{},"f:capabilities":{".":{},"f:add":{}},"f:privileged":{}},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/dev\"}":{".":{},"f:mountPath":{},"f:mountPropagation":{},"f:name":{}},"k:{\"mountPath\":\"/etc/config\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/etc/etl\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/var/lib/cloud/data\"}":{".":{},"f:mountPath":{},"f:name":{},"f:readOnly":{}},"k:{\"mountPath\":\"/var/lib/kubelet\"}":{".":{},"f:mountPath":{},"f:mountPropagation":{},"f:name":{}}}},"k:{\"name\":\"node-driver-registrar\"}":{".":{},"f:args":{},"f:env":{".":{},"k:{\"name\":\"ADDRESS\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"DRIVER_REG_SOCK_PATH\"}":{".":{},"f:name":{},"f:value":{}},"k:{\"name\":\"KUBE_NODE_NAME\"}":{".":{},"f:name":{},"f:valueFrom":{".":{},"f:fieldRef":{".":{},"f:apiVersion":{},"f:fieldPath":{}}}}},"f:image":{},"f:imagePullPolicy":{},"f:lifecycle":{".":{},"f:preStop":{".":{},"f:exec":{".":{},"f:command":{}}}},"f:name":{},"f:resources":{},"f:terminationMessagePath":{},"f:terminationMessagePolicy":{},"f:volumeMounts":{".":{},"k:{\"mountPath\":\"/csi\"}":{".":{},"f:mountPath":{},"f:name":{}},"k:{\"mountPath\":\"/registration\"}":{".":{},"f:mountPath":{},"f:name":{}}}}},"f:dnsPolicy":{},"f:enableServiceLinks":{},"f:hostNetwork":{},"f:restartPolicy":{},"f:schedulerName":{},"f:securityContext":{},"f:serviceAccount":{},"f:serviceAccountName":{},"f:terminationGracePeriodSeconds":{},"f:tolerations":{},"f:volumes":{".":{},"k:{\"name\":\"etl-ca-volume\"}":{".":{},"f:configMap":{".":{},"f:defaultMode":{},"f:name":{}},"f:name":{}},"k:{\"name\":\"kubelet-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"pods-cloud-data\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"pods-probe-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"registration-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}},"k:{\"name\":\"secret-cinderplugin\"}":{".":{},"f:name":{},"f:secret":{".":{},"f:defaultMode":{},"f:secretName":{}}},"k:{\"name\":\"socket-dir\"}":{".":{},"f:hostPath":{".":{},"f:path":{},"f:type":{}},"f:name":{}}}}}
+            },
+            {
+              "manager": "kubelet",
+              "operation": "Update",
+              "apiVersion": "v1",
+              "time": "2021-03-24T14:13:03Z",
+              "fieldsType": "FieldsV1",
+              "fieldsV1": {"f:status":{"f:conditions":{"k:{\"type\":\"ContainersReady\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Initialized\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}},"k:{\"type\":\"Ready\"}":{".":{},"f:lastProbeTime":{},"f:lastTransitionTime":{},"f:status":{},"f:type":{}}},"f:containerStatuses":{},"f:hostIP":{},"f:phase":{},"f:podIP":{},"f:podIPs":{".":{},"k:{\"ip\":\"192.168.46.111\"}":{".":{},"f:ip":{}}},"f:startTime":{}}}
+            }
+          ]
+        },
+        "spec": {
+          "volumes": [
+            {
+              "name": "socket-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet/plugins/cinder.csi.openstack.org",
+                "type": "DirectoryOrCreate"
+              }
+            },
+            {
+              "name": "registration-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet/plugins_registry/",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "kubelet-dir",
+              "hostPath": {
+                "path": "/var/lib/kubelet",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "pods-cloud-data",
+              "hostPath": {
+                "path": "/var/lib/cloud/data",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "pods-probe-dir",
+              "hostPath": {
+                "path": "/dev",
+                "type": "Directory"
+              }
+            },
+            {
+              "name": "secret-cinderplugin",
+              "secret": {
+                "secretName": "cloud-config",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "etl-ca-volume",
+              "configMap": {
+                "name": "etl-ca",
+                "defaultMode": 420
+              }
+            },
+            {
+              "name": "csi-cinder-node-sa-token-td8hp",
+              "secret": {
+                "secretName": "csi-cinder-node-sa-token-td8hp",
+                "defaultMode": 420
+              }
+            }
+          ],
+          "containers": [
+            {
+              "name": "node-driver-registrar",
+              "image": "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0",
+              "args": [
+                "--csi-address=$(ADDRESS)",
+                "--kubelet-registration-path=$(DRIVER_REG_SOCK_PATH)"
+              ],
+              "env": [
+                {
+                  "name": "ADDRESS",
+                  "value": "/csi/csi.sock"
+                },
+                {
+                  "name": "DRIVER_REG_SOCK_PATH",
+                  "value": "/var/lib/kubelet/plugins/cinder.csi.openstack.org/csi.sock"
+                },
+                {
+                  "name": "KUBE_NODE_NAME",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "registration-dir",
+                  "mountPath": "/registration"
+                },
+                {
+                  "name": "csi-cinder-node-sa-token-td8hp",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "lifecycle": {
+                "preStop": {
+                  "exec": {
+                    "command": [
+                      "/bin/sh",
+                      "-c",
+                      "rm -rf /registration/cinder.csi.openstack.org /registration/cinder.csi.openstack.org-reg.sock"
+                    ]
+                  }
+                }
+              },
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent"
+            },
+            {
+              "name": "cinder-csi-plugin",
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "args": [
+                "/bin/cinder-csi-plugin",
+                "--nodeid=$(NODE_ID)",
+                "--endpoint=$(CSI_ENDPOINT)",
+                "--cloud-config=$(CLOUD_CONFIG)"
+              ],
+              "env": [
+                {
+                  "name": "NODE_ID",
+                  "valueFrom": {
+                    "fieldRef": {
+                      "apiVersion": "v1",
+                      "fieldPath": "spec.nodeName"
+                    }
+                  }
+                },
+                {
+                  "name": "CSI_ENDPOINT",
+                  "value": "unix://csi/csi.sock"
+                },
+                {
+                  "name": "CLOUD_CONFIG",
+                  "value": "/etc/config/cloud.conf"
+                }
+              ],
+              "resources": {
+
+              },
+              "volumeMounts": [
+                {
+                  "name": "socket-dir",
+                  "mountPath": "/csi"
+                },
+                {
+                  "name": "kubelet-dir",
+                  "mountPath": "/var/lib/kubelet",
+                  "mountPropagation": "Bidirectional"
+                },
+                {
+                  "name": "pods-cloud-data",
+                  "readOnly": true,
+                  "mountPath": "/var/lib/cloud/data"
+                },
+                {
+                  "name": "pods-probe-dir",
+                  "mountPath": "/dev",
+                  "mountPropagation": "HostToContainer"
+                },
+                {
+                  "name": "secret-cinderplugin",
+                  "readOnly": true,
+                  "mountPath": "/etc/config"
+                },
+                {
+                  "name": "etl-ca-volume",
+                  "readOnly": true,
+                  "mountPath": "/etc/etl"
+                },
+                {
+                  "name": "csi-cinder-node-sa-token-td8hp",
+                  "readOnly": true,
+                  "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+                }
+              ],
+              "terminationMessagePath": "/dev/termination-log",
+              "terminationMessagePolicy": "File",
+              "imagePullPolicy": "IfNotPresent",
+              "securityContext": {
+                "capabilities": {
+                  "add": [
+                    "SYS_ADMIN"
+                  ]
+                },
+                "privileged": true,
+                "allowPrivilegeEscalation": true
+              }
+            }
+          ],
+          "restartPolicy": "Always",
+          "terminationGracePeriodSeconds": 30,
+          "dnsPolicy": "ClusterFirst",
+          "serviceAccountName": "csi-cinder-node-sa",
+          "serviceAccount": "csi-cinder-node-sa",
+          "nodeName": "worker-3",
+          "hostNetwork": true,
+          "securityContext": {
+
+          },
+          "affinity": {
+            "nodeAffinity": {
+              "requiredDuringSchedulingIgnoredDuringExecution": {
+                "nodeSelectorTerms": [
+                  {
+                    "matchFields": [
+                      {
+                        "key": "metadata.name",
+                        "operator": "In",
+                        "values": [
+                          "worker-3"
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "schedulerName": "default-scheduler",
+          "tolerations": [
+            {
+              "key": "node.kubernetes.io/not-ready",
+              "operator": "Exists",
+              "effect": "NoExecute"
+            },
+            {
+              "key": "node.kubernetes.io/unreachable",
+              "operator": "Exists",
+              "effect": "NoExecute"
+            },
+            {
+              "key": "node.kubernetes.io/disk-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/memory-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/pid-pressure",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/unschedulable",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            },
+            {
+              "key": "node.kubernetes.io/network-unavailable",
+              "operator": "Exists",
+              "effect": "NoSchedule"
+            }
+          ],
+          "priority": 0,
+          "enableServiceLinks": true,
+          "preemptionPolicy": "PreemptLowerPriority"
+        },
+        "status": {
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "Initialized",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:43Z"
+            },
+            {
+              "type": "Ready",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:13:03Z"
+            },
+            {
+              "type": "ContainersReady",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:13:03Z"
+            },
+            {
+              "type": "PodScheduled",
+              "status": "True",
+              "lastProbeTime": null,
+              "lastTransitionTime": "2021-03-24T14:12:43Z"
+            }
+          ],
+          "hostIP": "192.168.46.111",
+          "podIP": "192.168.46.111",
+          "podIPs": [
+            {
+              "ip": "192.168.46.111"
+            }
+          ],
+          "startTime": "2021-03-24T14:12:43Z",
+          "containerStatuses": [
+            {
+              "name": "cinder-csi-plugin",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:13:03Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "docker.io/k8scloudprovider/cinder-csi-plugin:latest",
+              "imageID": "docker.io/k8scloudprovider/cinder-csi-plugin@sha256:a5add0b6579508ff40379388b3c5c55174573612c586c44ef9bc2556636f9897",
+              "containerID": "cri-o://70eec9778c143fbcc2dfeb0a483df561b441464d64602c74eed7814adf893be8",
+              "started": true
+            },
+            {
+              "name": "node-driver-registrar",
+              "state": {
+                "running": {
+                  "startedAt": "2021-03-24T14:12:48Z"
+                }
+              },
+              "lastState": {
+
+              },
+              "ready": true,
+              "restartCount": 0,
+              "image": "quay.io/k8scsi/csi-node-driver-registrar:v1.1.0",
+              "imageID": "quay.io/k8scsi/csi-node-driver-registrar@sha256:13daf82fb99e951a4bff8ae5fc7c17c3a8fe7130be6400990d8f6076c32d4599",
+              "containerID": "cri-o://54edd1eafc698662ff1398619fd3315ff35909883b40e65cd03944926cca95d1",
+              "started": true
+            }
+          ],
+          "qosClass": "BestEffort"
+        }
+      }
+    ]
+  }
