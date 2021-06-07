@@ -7,6 +7,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CodeModel } from '@ngstack/code-editor';
 import * as YAML from 'yaml';
 import { Router } from '@angular/router';
+import { clean, updateItem } from '../procesar/procesar.actions';
 
 const baseGetValue = (element: any, key: string): string => {
   const paths = key.split('.');
@@ -33,9 +34,11 @@ export class DashboardComponent {
   _procesar: IProcesarState = {
     items: [],
     idField: '',
-    nameField: ''
+    nameField: '',
+    customFields: []
   };
-  displayedColumns: string[] = ['id', 'name', 'action'];
+  baseColumns: string[] = ['id', 'name'];
+  displayedColumns: string[] = this.baseColumns;
   dataSource = new MatTableDataSource(this._procesar.items);
   procesar$: Observable<IProcesarState> | undefined;
 
@@ -46,8 +49,10 @@ export class DashboardComponent {
   ) {
     this.procesar$ = store.select('procesar');
     this.procesar$.subscribe(procesar => {
-      console.log('Procesar Subscribe - Items changed:', procesar);
+      console.log('Dashboard Procesar Subscribe - Items changed:', procesar);
       this._procesar = procesar;
+      this.displayedColumns = this.baseColumns.concat(procesar.customFields.map(field => (field.key)));
+      this.displayedColumns.push('action');
       this.dataSource = this.newDataSource(this._procesar.items);
     });
   }
@@ -63,7 +68,8 @@ export class DashboardComponent {
     const localDataSource = new MatTableDataSource(origin);
     localDataSource.filterPredicate = (data: Element, filter: string) => {
       return this.getValue(data, this._procesar.idField).toLowerCase().includes(filter) || 
-        this.getValue(data, this._procesar.nameField).toLowerCase().includes(filter);
+        this.getValue(data, this._procesar.nameField).toLowerCase().includes(filter) ||
+        this._procesar.customFields.filter(field => this.getValue(data, field.key).toLowerCase().includes(filter)).length > 0;
     }
     return localDataSource;
   }
@@ -73,18 +79,23 @@ export class DashboardComponent {
   }
 
   goToHome() {
-    localStorage.clear();
+    this.store.dispatch(clean());
     this.router.navigate([""]);
+  }
+
+  createOnlineSession() {
+
   }
 }
 
 @Component({
   selector: 'dialog-element-detail',
-  templateUrl: './dialog-element-detail.html',
+  templateUrl: './dialog-element-detail/dialog-element-detail.html',
   styleUrls: ['./dashboard.component.scss']
 })
 export class DialogElementDetail {
-  public options = {
+  readOnly = true;
+  options = {
     contextmenu: true,
     minimap: {
       enabled: true
@@ -97,6 +108,7 @@ export class DialogElementDetail {
   };
 
   constructor(
+    private store: Store<{ procesar: IProcesarState }>,
     @Inject(MAT_DIALOG_DATA) public input: any
   ) {
     console.log('Dialog Detail - Element:', input);
@@ -104,4 +116,11 @@ export class DialogElementDetail {
   }
 
   getValue(element: any, key: string): string { return baseGetValue(element, key); }
+
+  save(value: any) {
+    const updatedItem = YAML.parse(value);
+    if (updatedItem) {
+      this.store.dispatch(updateItem({ updatedItem: updatedItem }));
+    }
+  }
 }

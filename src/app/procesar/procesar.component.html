@@ -1,8 +1,9 @@
-<div fxLayout="column" fxFlexFill>
-  <div fxLayout="row wrap" fxLayoutAlign="space-around center" class="mt-2">
+<div fxLayout="row wrap"  fxLayoutAlign="space-around" fxFlexFill>
+  <div fxLayout="column" class="mt-2">
+    <h2>Start a new process</h2>
     <mat-vertical-stepper linear="true" class="procesar-stepper" #stepper>
       <mat-step editable="false" [stepControl]="registerFormGroup">
-        <form [formGroup]="registerFormGroup">
+        <form [formGroup]="registerFormGroup" novalidate>
           <ng-template matStepLabel>Fill out your YAML URL repository</ng-template>
           <mat-form-field class="form-field-full-width">
             <mat-label>URL</mat-label>
@@ -19,44 +20,26 @@
           </div>
         </form>
       </mat-step>
-      <mat-step editable="false" [stepControl]="processFormGroup">
+      <mat-step editable="false">
         <ng-template matStepLabel>Load data from repository</ng-template>
-        <p *ngIf="!registrar">We are trying to get all YAMLs files from URL that you set.</p>
-        <p *ngIf="registrar">We could load {{ items.length }} items.</p>
-        <div class="mx-1" *ngIf="registrar">
-          <mat-expansion-panel>
-            <mat-expansion-panel-header>
-              First item detail
-            </mat-expansion-panel-header>
-            <p>
-              <ngx-json-viewer [json]="items[0]" [expanded]="false"></ngx-json-viewer>
-            </p>
-          </mat-expansion-panel>
-        </div>
-        <mat-spinner *ngIf="!registrar" diameter="50"></mat-spinner>
-        <p>Ready to see your YAML?</p>
-        <form [formGroup]="processFormGroup" *ngIf="registrar">
-          <mat-form-field class="form-field-full-width mt-1">
-            <mat-label>ID Field</mat-label>
-            <input matInput placeholder="metadata.uid" formControlName="idField" required>
-            <mat-hint>Field that represents the unique identifier of its item</mat-hint>
-          </mat-form-field>
-          <p>
-            Value of ID field for first item: {{ getValue(this.processFormGroup.value.idField) }}
-          </p>
-          <mat-form-field class="form-field-full-width mx-1">
-            <mat-label>Name Field</mat-label>
-            <input matInput placeholder="metadata.name" formControlName="nameField" required>
-            <mat-hint>Field that represents the name of its item</mat-hint>
-          </mat-form-field>
-          <p>
-            Value of Name field for first item: {{ getValue(this.processFormGroup.value.nameField) }}
-          </p>
-          <button mat-button *ngIf="registrar" (click)="doProcess()">Yes!, Go to dashboard</button>
-          <button mat-button *ngIf="!registrar" (click)="cancelLoading()">Cancel</button>
-          <button mat-button *ngIf="registrar" (click)="stepper.reset()">Reset</button>
-        </form>
+        <app-configure-form [cancelLoading]="cancelLoading" [registrar]="registrar"></app-configure-form>
       </mat-step>
     </mat-vertical-stepper>
+  </div>
+  <div fxLayout="column" class="mt-2">
+    <h2>Get into a online session</h2>
+    <form [formGroup]="onlineSessionFormGroup" novalidate>
+      <mat-form-field class="form-field-full-width">
+        <mat-label>Session ID</mat-label>
+        <input matInput placeholder="123456789" formControlName="id" required>
+        <mat-hint>Id of an existent online session where you wanna connect.</mat-hint>
+      </mat-form-field>
+      <div class="mt-2">
+        <button mat-button (click)="loadOnlineSession()" matTooltip="Not available yet" disabled>
+          Load now
+        </button>
+      </div>
+      <app-configure-form *ngIf="loaded" [registrar]="true" [readOnly]="true"></app-configure-form>
+    </form>
   </div>
 </div>

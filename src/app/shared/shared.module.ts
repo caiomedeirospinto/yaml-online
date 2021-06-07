@@ -15,6 +15,10 @@ import { NgxJsonViewerModule } from 'ngx-json-viewer';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatIconModule } from '@angular/material/icon';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -34,7 +38,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     NgxJsonViewerModule,
     MatTableModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ],
   exports: [
     MatToolbarModule,
@@ -51,7 +59,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     NgxJsonViewerModule,
     MatTableModule,
     MatDialogModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatProgressBarModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }

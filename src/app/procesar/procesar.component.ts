@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
-import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { ProcesarService } from 'src/app/services/procesar.service';
 import { IProcesarState } from '../models/procesar';
 import { Store } from '@ngrx/store';
-import { configure, setItems } from './procesar.actions';
+import { setItems } from './procesar.actions';
 
 @Component({
   selector: 'app-procesar',
@@ -17,35 +16,25 @@ export class ProcesarComponent implements OnInit {
   @ViewChild('stepper')
   stepper: MatStepper | undefined;
 
-  registrar: boolean = false;
+  loaded = false;
+  registrar = false;
   registerFormGroup: FormGroup = this.formBuilder.group({});
-  processFormGroup: FormGroup = this.formBuilder.group({});
+  onlineSessionFormGroup: FormGroup = this.formBuilder.group({});
   process: Subscription | undefined;
-
-  procesar$: Observable<IProcesarState> | undefined;
-  items: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private serviceProcesar: ProcesarService,
-    private router: Router,
     private store: Store<{ procesar: IProcesarState }>
-  ) {
-    this.procesar$ = store.select('procesar');
-    this.procesar$.subscribe(procesar => {
-      console.log('Procesar Subscribe - Items changed:', procesar);
-      this.items = procesar.items;
-    });
-  }
+  ) { }
 
   ngOnInit(): void {
     this.registerFormGroup = this.formBuilder.group({
       url: ['assets/example.json', Validators.required],
       itemsField: ['items', Validators.required]
     });
-    this.processFormGroup = this.formBuilder.group({
-      idField: ['', Validators.required],
-      nameField: ['', Validators.required]
+    this.onlineSessionFormGroup = this.formBuilder.group({
+      id: ['', Validators.required]
     });
   }
 
@@ -67,37 +56,13 @@ export class ProcesarComponent implements OnInit {
   cancelLoading() {
     console.log('Cancel Loading - Stepper.');
     this.process?.unsubscribe();
-    this.stepper?.reset();
+    this.reset();
   }
 
-  doProcess() {
-    if (this.processFormGroup.valid) {
-      this.store.dispatch(configure({
-        idField: this.processFormGroup.value.idField,
-        nameField: this.processFormGroup.value.nameField
-      }));
-      this.router.navigate(['/dashboard']);
-    }
+  reset() {
+    this.registrar = false;
+    this.stepper?.previous();
   }
 
-  getValue(key: string): string {
-    if (this.items.length === 0) {
-      return '';
-    }
-    if (this.items.length !== 0) {
-      const paths = key.split('.');
-      let current = this.items[0]
-        , i;
-
-      for (i = 0; i < paths.length; ++i) {
-        if (current[paths[i]] == undefined) {
-          return '';
-        } else {
-          current = current[paths[i]];
-        }
-      }
-      return current;
-    }
-    return '';
-  }
+  loadOnlineSession() { }
 }

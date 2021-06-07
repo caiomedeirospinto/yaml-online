@@ -1,0 +1,17 @@
+<h3>Progress Bar field: {{ progressField?.field }} </h3>
+<mat-progress-bar
+  class="mx-2 mb-2"
+  color="primary"
+  mode="buffer"
+  [value]="firstState()"
+  [bufferValue]="secondState()">
+</mat-progress-bar>
+<p>
+  <strong>First State ({{ progressField?.firstState }}):</strong> {{ firstState().toFixed(2) }} %
+</p>
+<p>
+  <strong>Second State ({{ progressField?.secondState }}):</strong> {{ (secondState() - firstState()).toFixed(2) }} %
+</p>
+<p>
+  <strong>Others:</strong> {{ others().toFixed(2) }} %
+</p>

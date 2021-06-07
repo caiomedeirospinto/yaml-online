@@ -1,0 +1,17 @@
+table {
+  width: 100%;
+  max-width: 500px;
+
+  .mat-column-action {
+    width: 20px;
+    text-align: center;
+  }
+}
+
+mat-spinner {
+  margin: 20px;
+}
+
+.form-field-full-width {
+  width: 100%;
+}

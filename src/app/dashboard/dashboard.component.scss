@@ -3,24 +3,35 @@
   width: 100%;
 }
 
-table {
-  max-width: 1200px;
+.full-progress-bar {
   width: 100%;
+  max-width: 1500;
 }
 
-.mat-column-action {
-  width: 32px;
-  text-align: center;
-}
+table {
+  max-width: 1600px;
+  width: 100%;
+  white-space: normal;
 
-.mat-column-id {
-  max-width: 80px;
+  td {
+    overflow-wrap: break-word;
+    padding: 15px;
+  }
+
+  .mat-column-action {
+    width: 32px;
+    text-align: center;
+  }
+
+  .mat-column-id {
+    max-width: 150px;
+  }
+
+  .table-title {
+    font-size: 18px;
+  }
 }
 
 ngs-code-editor {
-  height: 400px;
-}
-
-.table-title {
-  font-size: 18px;
+  height: 500px;
 }

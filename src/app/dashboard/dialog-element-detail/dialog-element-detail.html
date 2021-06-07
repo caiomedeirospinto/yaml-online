@@ -10,7 +10,9 @@
 <ngs-code-editor
   theme="vs-dark"
   [codeModel]="codeModel"
-  [options]="options">
+  [options]="options"
+  [readOnly]="readOnly"
+  (valueChanged)="save($event)">
 </ngs-code-editor>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>

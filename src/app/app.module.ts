@@ -10,13 +10,17 @@ import { DashboardComponent, DialogElementDetail } from './dashboard/dashboard.c
 import { StoreModule } from '@ngrx/store';
 import { procesarReducer } from 'src/app/procesar/procesar.reducer';
 import { CodeEditorModule } from '@ngstack/code-editor';
+import { ItemsProgressBarComponent } from './items-progress-bar/items-progress-bar.component';
+import { ConfigureFormComponent } from './procesar/configure-form/configure-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProcesarComponent,
     DashboardComponent,
-    DialogElementDetail
+    DialogElementDetail,
+    ItemsProgressBarComponent,
+    ConfigureFormComponent
   ],
   imports: [
     BrowserModule,
