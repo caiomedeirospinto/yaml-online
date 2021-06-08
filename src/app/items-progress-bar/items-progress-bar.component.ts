@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { IProcesarState, IProgressField } from '../models/procesar';
+import { IOnlineSesion } from '../models/online-sesion';
+import { IProgressField } from '../models/procesar';
+import { CustomItemService } from '../services/custom-item.service';
 
 @Component({
   selector: 'app-items-progress-bar',
@@ -16,14 +18,17 @@ export class ItemsProgressBarComponent {
     firstState: '',
     secondState: ''
   };
-  procesar$: Observable<IProcesarState> | undefined;
+  procesar$: Observable<IOnlineSesion> | undefined;
 
-  constructor(private store: Store<{ procesar: IProcesarState }>) {
-    this.procesar$ = store.select('procesar');
-    this.procesar$.subscribe(procesar => {
-      console.log('Item Detail Procesar Subscribe - Items changed:', procesar);
-      this.progressField = procesar.progressField;
-      this.items = procesar.items;
+  constructor(
+    private store: Store<{ onlineSession: IOnlineSesion }>,
+    private customItemService: CustomItemService
+  ) {
+    this.procesar$ = store.select('onlineSession');
+    this.procesar$.subscribe(onlineSession => {
+      console.log('Item Detail Online Session Subscribe - Items changed:', onlineSession);
+      this.progressField = onlineSession.procesar.progressField;
+      this.items = onlineSession.procesar.items;
     });
   }
 
@@ -32,7 +37,7 @@ export class ItemsProgressBarComponent {
       return 0;
     }
     const field = this.progressField?.field;
-    return (this.items.filter(element => (element[field] === this.progressField?.firstState)).length * 100) / this.items.length;
+    return (this.items.filter(element => (this.customItemService.baseGetValue(element, field) === this.progressField?.firstState)).length * 100) / this.items.length;
   }
 
   secondState(): number {
@@ -40,7 +45,7 @@ export class ItemsProgressBarComponent {
       return 0;
     }
     const field = this.progressField?.field;
-    return (this.items.filter(element => ([this.progressField?.firstState, this.progressField?.secondState].includes(element[field]))).length * 100) / this.items.length;
+    return (this.items.filter(element => ([this.progressField?.firstState, this.progressField?.secondState].includes(this.customItemService.baseGetValue(element, field)))).length * 100) / this.items.length;
   }
 
   others(): number {
@@ -48,6 +53,6 @@ export class ItemsProgressBarComponent {
       return 0;
     }
     const field = this.progressField?.field;
-    return (this.items.filter(element => (![this.progressField?.firstState, this.progressField?.secondState].includes(element[field]))).length * 100) / this.items.length;
+    return (this.items.filter(element => (![this.progressField?.firstState, this.progressField?.secondState].includes(this.customItemService.baseGetValue(element, field)))).length * 100) / this.items.length;
   }
 }

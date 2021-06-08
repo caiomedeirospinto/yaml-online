@@ -5,9 +5,10 @@ import { Subscription } from 'rxjs';
 import { ProcesarService } from 'src/app/services/procesar.service';
 import { IProcesarState } from '../models/procesar';
 import { Store } from '@ngrx/store';
-import { clean, set, setItems } from './procesar.actions';
+import { clean, set, setItems } from '../stores/online-session.actions';
 import { FeatureTogglesService } from '../services/feature-toggles.service';
 import { OnlineSessionService } from '../services/online-session.service';
+import { IOnlineSesion } from '../models/online-sesion';
 
 @Component({
   selector: 'app-procesar',
@@ -30,7 +31,7 @@ export class ProcesarComponent implements OnInit {
     private serviceProcesar: ProcesarService,
     private onlineSessionService: OnlineSessionService,
     public featureService: FeatureTogglesService,
-    private store: Store<{ procesar: IProcesarState }>
+    private store: Store<{ onlineSession: IOnlineSesion }>
   ) { }
 
   ngOnInit(): void {
@@ -39,6 +40,7 @@ export class ProcesarComponent implements OnInit {
       itemsField: ['items', Validators.required]
     });
     this.onlineSessionFormGroup = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.pattern("[a-z0-9]*")]],
       id: ['', [Validators.required, Validators.pattern("[0-9]*")]]
     });
   }
@@ -78,8 +80,9 @@ export class ProcesarComponent implements OnInit {
       this.onlineSessionService.findById(this.onlineSessionFormGroup.value.id)
         .subscribe((onlineSession) => {
           console.log('Load Online Session - Online Session: ', onlineSession);
+          localStorage.setItem('username', this.onlineSessionFormGroup.value.username);
           if (onlineSession.id) {
-            this.store.dispatch(set({ ...onlineSession }));
+            this.store.dispatch(set({ onlineSession }));
             this.loaded = true;
           } else {
             this.store.dispatch(clean());

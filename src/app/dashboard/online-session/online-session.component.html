@@ -1,0 +1,16 @@
+<div *ngIf="featureService.isEnabled('onlineSession') && _onlineSession.id === 0">
+  <button mat-raised-button color="primary" (click)="openCreateOnlineSessionDialog()" class="mr-1" *ngIf="!creating">
+    Create an online session
+  </button>
+  <span class="mr-1" *ngIf="creating">Creating session</span><mat-spinner *ngIf="creating" diameter="30"></mat-spinner>
+</div>
+<div *ngIf="featureService.isEnabled('onlineSession') && _onlineSession.id !== 0">
+  <p>
+    Hi {{ username }},
+    your session ID: {{ _onlineSession.id }}<br/>
+    Connection state: {{ stateName }}
+  </p>
+  <button mat-raised-button color="warn" (click)="closeConnection()" class="mr-1">
+    Close connection
+  </button>
+</div>

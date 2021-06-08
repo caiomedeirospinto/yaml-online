@@ -1,6 +1,6 @@
 <div fxLayout="column" fxFlexFill>
   <div fxLayout="row" fxLayoutAlign="center" class="mt-2">
-    <app-items-progress-bar class="full-progress-bar px-4" *ngIf="_procesar.progressField"></app-items-progress-bar>
+    <app-items-progress-bar class="full-progress-bar px-4" *ngIf="_onlineSession.procesar.progressField"></app-items-progress-bar>
   </div>
   <div fxLayout="row" fxLayoutAlign="space-evenly center" class="mt-2">
     <div fxLayout="column" class="filter">
@@ -14,9 +14,7 @@
         <button mat-raised-button color="warn" (click)="goToHome()" matTooltip="It will clear all your current load" class="mr-1">
           Start again
         </button>
-        <button mat-raised-button color="primary" (click)="createOnlineSession()" class="mr-1" *ngIf="featureService.isEnabled('onlineSession')">
-          Create an online session
-        </button>
+        <app-online-session></app-online-session>
       </div>
     </div>
   </div>
@@ -25,13 +23,13 @@
       <caption class="mx-1 table-title">List of items</caption>
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef id="idElement"> ID </th>
-        <td mat-cell *matCellDef="let element"> {{ getValue(element, this._procesar.idField) }} </td>
+        <td mat-cell *matCellDef="let element"> {{ getValue(element, this._onlineSession.procesar.idField) }} </td>
       </ng-container>
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef id="nameElement"> Name </th>
-        <td mat-cell *matCellDef="let element"> {{ getValue(element, this._procesar.nameField) }} </td>
+        <td mat-cell *matCellDef="let element"> {{ getValue(element, this._onlineSession.procesar.nameField) }} </td>
       </ng-container>
-      <ng-container *ngFor="let customField of _procesar.customFields; let i = index" [matColumnDef]="customField.key">
+      <ng-container *ngFor="let customField of _onlineSession.procesar.customFields; let i = index" [matColumnDef]="customField.key">
         <th mat-header-cell *matHeaderCellDef [id]="i"> {{ customField.displayName }} </th>
         <td mat-cell *matCellDef="let element"> {{ getValue(element, customField.key) }} </td>
       </ng-container>

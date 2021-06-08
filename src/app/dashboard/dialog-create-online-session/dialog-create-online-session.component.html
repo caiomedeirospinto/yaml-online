@@ -1,0 +1,13 @@
+<h3>Create your online session</h3>
+<form [formGroup]="createSessionFormGroup" novalidate>
+  <mat-form-field class="form-field-full-width">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="imexample1" formControlName="username" required>
+    <mat-hint>Username to connect to online session. Supports only lowercase and numbers.</mat-hint>
+  </mat-form-field>
+  <div class="mt-2 mb-2">
+    <button mat-button (click)="createOnlineSession()">
+      Create session
+    </button>
+  </div>
+</form>

@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { ICustomField, IProcesarState, IProgressField } from 'src/app/models/procesar';
-import { configure, setCustomFields, setProgressField } from '../procesar.actions';
+import { IOnlineSesion } from 'src/app/models/online-sesion';
+import { ICustomField, IProgressField } from 'src/app/models/procesar';
+import { configure, setCustomFields, setProgressField } from '../../stores/online-session.actions';
 
 @Component({
   selector: 'app-configure-form',
@@ -34,7 +35,7 @@ export class ConfigureFormComponent {
       secondState: ['']
     }),
   });
-  procesar$: Observable<IProcesarState> | undefined;
+  procesar$: Observable<IOnlineSesion> | undefined;
   items: any[] = [];
   customFields: ICustomField[] = [];
   displayedColumns: string[] = ['displayName', 'key', 'action'];
@@ -42,29 +43,33 @@ export class ConfigureFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private store: Store<{ procesar: IProcesarState }>
+    private store: Store<{ onlineSession: IOnlineSesion }>
   ) {
-    this.procesar$ = store.select('procesar');
-    this.procesar$.subscribe(procesar => {
-      console.log('Procesar Subscribe - Items changed:', procesar);
-      this.items = Object.assign([], procesar.items);
-      this.customFields = Object.assign([], procesar.customFields);
-      this.processFormGroup.patchValue(procesar);
+    this.procesar$ = store.select('onlineSession');
+    this.procesar$.subscribe(onlineSession => {
+      console.log('Online Session Subscribe - Items changed:', onlineSession);
+      this.items = Object.assign([], onlineSession.procesar.items);
+      this.customFields = Object.assign([], onlineSession.procesar.customFields);
+      if (!this.registrar) {
+        this.processFormGroup.patchValue(onlineSession.procesar);
+      }
     });
   }
 
   doProcess() {
     if (this.processFormGroup.valid) {
+      if (this.processFormGroup.value.enabledProgressBar) {
+        this.store.dispatch(setProgressField({
+          progressField: <IProgressField>{
+            field: this.processFormGroup.controls.progressField.value.field,
+            firstState: this.processFormGroup.controls.progressField.value.firstState,
+            secondState: this.processFormGroup.controls.progressField.value.secondState
+          }
+        }));
+      }
       this.store.dispatch(configure({
         idField: this.processFormGroup.value.idField,
         nameField: this.processFormGroup.value.nameField
-      }));
-      this.store.dispatch(setProgressField({
-        progressField: <IProgressField>{
-          field: this.processFormGroup.controls.progressField.value.field,
-          firstState: this.processFormGroup.controls.progressField.value.firstState,
-          secondState: this.processFormGroup.controls.progressField.value.secondState
-        }
       }));
       this.router.navigate(['/dashboard']);
     }

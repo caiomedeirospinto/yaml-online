@@ -31,6 +31,11 @@
     <h2>Get into a online session</h2>
     <form [formGroup]="onlineSessionFormGroup" novalidate>
       <mat-form-field class="form-field-full-width">
+        <mat-label>Username</mat-label>
+        <input matInput placeholder="imexample1" formControlName="username" required>
+        <mat-hint>Username to connect to online session. Supports only lowercase and numbers.</mat-hint>
+      </mat-form-field>
+      <mat-form-field class="form-field-full-width mt-1">
         <mat-label>Session ID</mat-label>
         <input matInput placeholder="123456789" formControlName="id" required>
         <mat-hint>Id of an existent online session where you wanna connect.</mat-hint>

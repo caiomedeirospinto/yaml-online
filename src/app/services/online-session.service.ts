@@ -1,10 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, EMPTY, Observable, Subject, timer } from 'rxjs';
 import { catchError, delayWhen, map, retryWhen, switchAll, tap } from 'rxjs/internal/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { IOnlineSesion } from '../models/online-sesion';
 import { WsConnectionState } from '../models/ws-connection-state';
+import { set, setItems } from '../stores/online-session.actions';
 import { ConfigService } from './config.service';
 
 @Injectable({
@@ -12,34 +14,49 @@ import { ConfigService } from './config.service';
 })
 export class OnlineSessionService implements OnDestroy {
 
-  private readonly subjectState = new BehaviorSubject<WsConnectionState>(WsConnectionState.CONNECTING);
+  private readonly subjectState = new BehaviorSubject<WsConnectionState>(WsConnectionState.INIT);
   public readonly state$ = this.subjectState.asObservable();
 
   private socket$: WebSocketSubject<any> | undefined;
-  private changesSubject$ = new Subject<any>();
 
-  public changes$ = this.changesSubject$.pipe(switchAll(), catchError(e => { throw e; }));
   public doReconnect = false;
 
   constructor(
     private configService: ConfigService,
-    private http: HttpClient
+    private http: HttpClient,
+    private store: Store<{ onlineSession: IOnlineSesion }>
   ) { }
 
-  public connect(sessionId: string, username: string, cfg: { reconnect: boolean } = { reconnect: false }): void {
+  public connect(sessionId: string, cfg: { reconnect: boolean } = { reconnect: false }): void {
+    console.log('Online Session Connecting:', sessionId);
     if (!this.socket$ || this.socket$.closed) {
-      this.socket$ = this.getNewWebSocket(sessionId, username);
-      const changes = this.socket$.pipe(cfg.reconnect ? this.reconnect : o => o,
+      this.socket$ = this.getNewWebSocket(sessionId);
+      this.socket$.pipe(cfg.reconnect ? this.reconnect : o => o,
         tap({
-          next: (data: any) => {
-            console.log('[DEBUG] Mensaje recibido: ', data);
-            if (data.value === '404') {
+          next: (message: any) => {
+            console.log('[DEBUG] Mensaje recibido: ', message);
+            if (message.value === '404') {
               this.close(WsConnectionState.NOTFOUND);
             }
 
-            if (data.key === 'init') {
+            if (message.key === 'init') {
               this.state = WsConnectionState.CONNECTED;
+              const currentOnlineSession = JSON.parse(message.value);
+              console.log('Online Session initialized:', currentOnlineSession);
+              this.store.dispatch(set({
+                onlineSession: {
+                  ...currentOnlineSession,
+                  procesar: {
+                    ...currentOnlineSession.procesar,
+                    items: JSON.parse(currentOnlineSession.procesar.items)
+                  }
+                }
+              }));
               this.doReconnect = true;
+            }
+
+            if (message.key === 'chaged') {
+              this.store.dispatch(setItems({ items: JSON.parse(message.value) }));
             }
           },
           error: error => {
@@ -47,9 +64,12 @@ export class OnlineSessionService implements OnDestroy {
             this.doReconnect = false;
           }
         }),
-        catchError(_ => EMPTY)
-      );
-      this.changesSubject$.next(changes);
+        catchError((error) => {
+          console.log('[DEBUG] Error to connect:', error);
+          this.doReconnect = false;
+          return EMPTY;
+        })
+      ).subscribe();
     }
   }
 
@@ -58,9 +78,12 @@ export class OnlineSessionService implements OnDestroy {
       delayWhen(_ => timer(500)))));
   }
 
-  private getNewWebSocket(sessionId: string, username: string): WebSocketSubject<{}> {
+  private getNewWebSocket(sessionId: string): WebSocketSubject<{}> {
+    const username = localStorage.getItem('username');
+    const url = `${this.configService.getConfig().onlineSession?.backends.ws}/${sessionId}/${username}`;
+    console.log('Online Session get Websocket connection:', url);
     return webSocket({
-        url: `${this.configService.getConfig().onlineSession?.backends.ws}/${sessionId}/${username}`,
+        url: url,
         openObserver: {
           next: () => {
             console.log('[DataService]: connection ok');
@@ -72,7 +95,7 @@ export class OnlineSessionService implements OnDestroy {
             this.socket$ = undefined;
             if (this.doReconnect) {
               this.state = WsConnectionState.RECONNECTING;
-              this.connect(sessionId, username, { reconnect: true });
+              this.connect(sessionId, { reconnect: true });
             }
             if (![
               WsConnectionState.CLOSED,
@@ -96,6 +119,7 @@ export class OnlineSessionService implements OnDestroy {
       this.doReconnect = false;
       this.socket$.complete();
       this.socket$ = undefined;
+      localStorage.clear();
     }
   }
 
@@ -115,7 +139,17 @@ export class OnlineSessionService implements OnDestroy {
   }
 
   new(onlineSession: IOnlineSesion) {
-    return this.http.post(this.configService.getConfig().onlineSession?.backends.apiRest, onlineSession);
+    const formatedItems = {
+      ...onlineSession,
+      procesar: {
+        ...onlineSession.procesar,
+        items: JSON.stringify(onlineSession.procesar.items)
+      }
+    };
+    return this.http.post<IOnlineSesion>(this.configService.getConfig().onlineSession?.backends.apiRest, formatedItems)
+      .pipe(
+        map((newOnlineSession: any) => (<IOnlineSesion>{ ...newOnlineSession, procesar: { ...newOnlineSession?.procesar, items: JSON.parse(newOnlineSession?.procesar['items'] || '{}') } }))
+      );
   }
 
   findById(sessionId: number) {

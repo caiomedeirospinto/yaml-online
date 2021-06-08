@@ -2,10 +2,10 @@ import { Component, Inject } from "@angular/core";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
 import { CodeModel } from "@ngstack/code-editor";
-import { IProcesarState } from "src/app/models/procesar";
-import { updateItem } from "src/app/procesar/procesar.actions";
+import { updateItem } from "src/app/stores/online-session.actions";
 import { CustomItemService } from "src/app/services/custom-item.service";
 import * as YAML from 'yaml';
+import { IOnlineSesion } from "src/app/models/online-sesion";
 
 @Component({
   selector: 'dialog-element-detail',
@@ -27,7 +27,7 @@ export class DialogElementDetail {
   };
 
   constructor(
-    private store: Store<{ procesar: IProcesarState }>,
+    private store: Store<{ onlineSession: IOnlineSesion }>,
     private customItemService: CustomItemService,
     @Inject(MAT_DIALOG_DATA) public input: any
   ) {
