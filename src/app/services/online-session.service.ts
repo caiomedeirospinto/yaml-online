@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, EMPTY, Observable, Subject, timer } from 'rxjs';
-import { catchError, delayWhen, map, retryWhen, switchAll, tap } from 'rxjs/internal/operators';
+import { catchError, delayWhen, map, retryWhen, scan, switchAll, take, tap } from 'rxjs/internal/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { IOnlineSesion } from '../models/online-sesion';
 import { WsConnectionState } from '../models/ws-connection-state';
@@ -31,7 +31,7 @@ export class OnlineSessionService implements OnDestroy {
     console.log('Online Session Connecting:', sessionId);
     if (!this.socket$ || this.socket$.closed) {
       this.socket$ = this.getNewWebSocket(sessionId);
-      this.socket$.pipe(cfg.reconnect ? this.reconnect : o => o,
+      this.socket$.pipe(cfg.reconnect && this.doReconnect ? this.reconnect : o => o,
         tap({
           next: (message: any) => {
             console.log('[DEBUG] Mensaje recibido: ', message);
@@ -55,7 +55,7 @@ export class OnlineSessionService implements OnDestroy {
               this.doReconnect = true;
             }
 
-            if (message.key === 'chaged') {
+            if (message.key === 'changed') {
               this.store.dispatch(setItems({ items: JSON.parse(message.value) }));
             }
           },
@@ -67,6 +67,7 @@ export class OnlineSessionService implements OnDestroy {
         catchError((error) => {
           console.log('[DEBUG] Error to connect:', error);
           this.doReconnect = false;
+          this.state = WsConnectionState.DISCONNECTED;
           return EMPTY;
         })
       ).subscribe();
@@ -74,8 +75,25 @@ export class OnlineSessionService implements OnDestroy {
   }
 
   private reconnect(observable: Observable<any>): Observable<any> {
-    return observable.pipe(retryWhen(errors => errors.pipe(tap(val => console.log('[Data Service] Try to reconnect', val)),
-      delayWhen(_ => timer(500)))));
+    return observable.pipe(
+      retryWhen(errors =>
+        errors.pipe(
+          scan((acc) => {
+            console.log("attempt " + acc);
+            return acc + 1;
+          }, 1),
+          take(3),
+          delayWhen(val => timer(val * 5000)),
+          tap(val => {
+            console.log('[Data Service] Try to reconnect', val)
+            if (val >= 3) {
+              this.doReconnect = false;
+              this.state = WsConnectionState.DISCONNECTED;
+            }
+          })
+        )
+      )
+    );
   }
 
   private getNewWebSocket(sessionId: string): WebSocketSubject<{}> {
@@ -95,7 +113,7 @@ export class OnlineSessionService implements OnDestroy {
             this.socket$ = undefined;
             if (this.doReconnect) {
               this.state = WsConnectionState.RECONNECTING;
-              this.connect(sessionId, { reconnect: true });
+              this.connect(sessionId, { reconnect: false });
             }
             if (![
               WsConnectionState.CLOSED,

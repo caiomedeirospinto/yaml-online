@@ -66,14 +66,14 @@ export class OnlineSessionComponent implements OnInit {
             verticalPosition: 'top'
           }
         ).onAction().subscribe(() => {
-          this.onlineSessionService.connect(this._onlineSession.id.toString(), { reconnect: true });
+          this.onlineSessionService.connect(this._onlineSession.id.toString(), { reconnect: false });
         });
       } else {
         this.snackBar.dismiss();
       }
       this.state = state;
     });
-    this.onlineSessionService.connect(this._onlineSession.id.toString(), { reconnect: true });
+    this.onlineSessionService.connect(this._onlineSession.id.toString(), { reconnect: false });
   }
 
   openCreateOnlineSessionDialog() {

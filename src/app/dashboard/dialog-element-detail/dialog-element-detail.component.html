@@ -7,6 +7,10 @@
     getValue(input.data, input.procesar.nameField)
   }}
 </p>
+<p *ngIf="readOnly" class="disconnected-message">
+  <strong>Read Only state!</strong><br/>
+  You cannot edit this item because you are not connected to an online session.
+</p>
 <ngs-code-editor
   theme="vs-dark"
   [codeModel]="codeModel"

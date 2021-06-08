@@ -16,6 +16,7 @@ import { ItemsProgressBarComponent } from './items-progress-bar/items-progress-b
 import { ConfigureFormComponent } from './procesar/configure-form/configure-form.component';
 import { ConfigService } from './services/config.service';
 import { OnlineSessionComponent } from './dashboard/online-session/online-session.component';
+import { EffectsModule } from '@ngrx/effects';
 
 export function initConfig(configService: ConfigService): () => void {
   return () => configService.loadConfig();
@@ -38,7 +39,8 @@ export function initConfig(configService: ConfigService): () => void {
     BrowserAnimationsModule,
     SharedModule,
     StoreModule.forRoot({ onlineSession: onlineSessionReducer }),
-    CodeEditorModule.forRoot()
+    CodeEditorModule.forRoot(),
+    EffectsModule.forRoot([])
   ],
   providers: [
     { provide: APP_INITIALIZER, useFactory: initConfig, deps: [ConfigService], multi: true }
