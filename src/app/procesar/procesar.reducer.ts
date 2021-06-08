@@ -1,5 +1,5 @@
 import { Action, createReducer, INIT, on } from '@ngrx/store';
-import { setItems, configure, setCustomFields, clean, setProgressField, updateItem } from './procesar.actions';
+import { setItems, configure, setCustomFields, clean, setProgressField, updateItem, set } from './procesar.actions';
 import { IProcesarState } from 'src/app/models/procesar';
 
 export const initialState: IProcesarState = {
@@ -11,6 +11,7 @@ export const initialState: IProcesarState = {
 
 const _procesarReducer = createReducer(
   initialState,
+  on(set, (state, { procesar }) => ({ ...procesar })),
   on(setItems, (state, { items }) => ({ ...state, items: items })),
   on(configure, (state, { idField, nameField }) => ({ ...state, idField: idField, nameField: nameField })),
   on(setCustomFields, (state, { customFields }) => ({ ...state, customFields: customFields })),

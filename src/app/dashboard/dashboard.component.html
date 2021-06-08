@@ -14,7 +14,7 @@
         <button mat-raised-button color="warn" (click)="goToHome()" matTooltip="It will clear all your current load" class="mr-1">
           Start again
         </button>
-        <button mat-raised-button color="primary" (click)="createOnlineSession()" class="mr-1" disabled>
+        <button mat-raised-button color="primary" (click)="createOnlineSession()" class="mr-1" *ngIf="featureService.isEnabled('onlineSession')">
           Create an online session
         </button>
       </div>

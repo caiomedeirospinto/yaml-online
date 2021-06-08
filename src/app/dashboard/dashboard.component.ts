@@ -1,28 +1,14 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { IProcesarState } from '../models/procesar';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CodeModel } from '@ngstack/code-editor';
-import * as YAML from 'yaml';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { clean, updateItem } from '../procesar/procesar.actions';
-
-const baseGetValue = (element: any, key: string): string => {
-  const paths = key.split('.');
-  let current = element
-    , i;
-
-  for (i = 0; i < paths.length; ++i) {
-    if (current[paths[i]] == undefined) {
-      return '';
-    } else {
-      current = current[paths[i]];
-    }
-  }
-  return current;
-};
+import { clean } from '../procesar/procesar.actions';
+import { FeatureTogglesService } from '../services/feature-toggles.service';
+import { DialogElementDetail } from './dialog-element-detail/dialog-element-detail.component';
+import { CustomItemService } from '../services/custom-item.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -45,6 +31,8 @@ export class DashboardComponent {
   constructor(
     private router: Router,
     private store: Store<{ procesar: IProcesarState }>,
+    private customItemService: CustomItemService,
+    public featureService: FeatureTogglesService,
     public dialog: MatDialog
   ) {
     this.procesar$ = store.select('procesar');
@@ -62,7 +50,7 @@ export class DashboardComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  getValue(element: any, key: string): string { return baseGetValue(element, key); }
+  getValue(element: any, key: string): string { return this.customItemService.baseGetValue(element, key); }
 
   newDataSource(origin: any[]): MatTableDataSource<any> {
     const localDataSource = new MatTableDataSource(origin);
@@ -85,42 +73,5 @@ export class DashboardComponent {
 
   createOnlineSession() {
 
-  }
-}
-
-@Component({
-  selector: 'dialog-element-detail',
-  templateUrl: './dialog-element-detail/dialog-element-detail.html',
-  styleUrls: ['./dashboard.component.scss']
-})
-export class DialogElementDetail {
-  readOnly = true;
-  options = {
-    contextmenu: true,
-    minimap: {
-      enabled: true
-    }
-  };
-  codeModel: CodeModel = {
-    language: 'yaml',
-    uri: 'element.json',
-    value: '---',
-  };
-
-  constructor(
-    private store: Store<{ procesar: IProcesarState }>,
-    @Inject(MAT_DIALOG_DATA) public input: any
-  ) {
-    console.log('Dialog Detail - Element:', input);
-    this.codeModel.value = YAML.stringify(input.data);
-  }
-
-  getValue(element: any, key: string): string { return baseGetValue(element, key); }
-
-  save(value: any) {
-    const updatedItem = YAML.parse(value);
-    if (updatedItem) {
-      this.store.dispatch(updateItem({ updatedItem: updatedItem }));
-    }
   }
 }

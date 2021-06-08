@@ -23,10 +23,11 @@
       <mat-step editable="false">
         <ng-template matStepLabel>Load data from repository</ng-template>
         <app-configure-form [cancelLoading]="cancelLoading" [registrar]="registrar"></app-configure-form>
+        <button mat-button *ngIf="registrar" (click)="reset()">Reset</button>
       </mat-step>
     </mat-vertical-stepper>
   </div>
-  <div fxLayout="column" class="mt-2">
+  <div fxLayout="column" class="mt-2" style="min-width: 360px;" *ngIf="featureService.isEnabled('onlineSession')">
     <h2>Get into a online session</h2>
     <form [formGroup]="onlineSessionFormGroup" novalidate>
       <mat-form-field class="form-field-full-width">
@@ -34,12 +35,13 @@
         <input matInput placeholder="123456789" formControlName="id" required>
         <mat-hint>Id of an existent online session where you wanna connect.</mat-hint>
       </mat-form-field>
-      <div class="mt-2">
-        <button mat-button (click)="loadOnlineSession()" matTooltip="Not available yet" disabled>
+      <div class="mt-2 mb-2">
+        <button mat-button (click)="loadOnlineSession()" *ngIf="!loadingSession">
           Load now
         </button>
+        <mat-spinner *ngIf="loadingSession" diameter="20"></mat-spinner>
       </div>
-      <app-configure-form *ngIf="loaded" [registrar]="true" [readOnly]="true"></app-configure-form>
+      <app-configure-form *ngIf="loaded" [registrar]="true" [cancelLoading]="cancelLoading" [readOnly]="true"></app-configure-form>
     </form>
   </div>
 </div>

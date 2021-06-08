@@ -5,7 +5,9 @@ import { Subscription } from 'rxjs';
 import { ProcesarService } from 'src/app/services/procesar.service';
 import { IProcesarState } from '../models/procesar';
 import { Store } from '@ngrx/store';
-import { setItems } from './procesar.actions';
+import { clean, set, setItems } from './procesar.actions';
+import { FeatureTogglesService } from '../services/feature-toggles.service';
+import { OnlineSessionService } from '../services/online-session.service';
 
 @Component({
   selector: 'app-procesar',
@@ -16,6 +18,7 @@ export class ProcesarComponent implements OnInit {
   @ViewChild('stepper')
   stepper: MatStepper | undefined;
 
+  loadingSession = false;
   loaded = false;
   registrar = false;
   registerFormGroup: FormGroup = this.formBuilder.group({});
@@ -25,6 +28,8 @@ export class ProcesarComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private serviceProcesar: ProcesarService,
+    private onlineSessionService: OnlineSessionService,
+    public featureService: FeatureTogglesService,
     private store: Store<{ procesar: IProcesarState }>
   ) { }
 
@@ -34,13 +39,14 @@ export class ProcesarComponent implements OnInit {
       itemsField: ['items', Validators.required]
     });
     this.onlineSessionFormGroup = this.formBuilder.group({
-      id: ['', Validators.required]
+      id: ['', [Validators.required, Validators.pattern("[0-9]*")]]
     });
   }
 
   register() {
     if (this.registerFormGroup.valid) {
       console.log('Do Load - URL:', this.registerFormGroup?.value.url);
+      this.store.dispatch(clean());
       this.stepper?.next();
       this.process = this.serviceProcesar.getYamls(
         this.registerFormGroup?.value.url,
@@ -49,6 +55,7 @@ export class ProcesarComponent implements OnInit {
         console.log('Do Load - Result:', result);
         this.store.dispatch(setItems({ items: <any[]> result }));
         this.registrar = true;
+        this.loaded = false;
       });
     }
   }
@@ -61,8 +68,27 @@ export class ProcesarComponent implements OnInit {
 
   reset() {
     this.registrar = false;
-    this.stepper?.previous();
+    this.stepper?.reset();
   }
 
-  loadOnlineSession() { }
+  loadOnlineSession() {
+    if (this.onlineSessionFormGroup.valid) {
+      this.reset();
+      this.loadingSession = true;
+      this.onlineSessionService.findById(this.onlineSessionFormGroup.value.id)
+        .subscribe((onlineSession) => {
+          console.log('Load Online Session - Online Session: ', onlineSession);
+          if (onlineSession.id) {
+            this.store.dispatch(set({ ...onlineSession }));
+            this.loaded = true;
+          } else {
+            this.store.dispatch(clean());
+          }
+          this.loadingSession = false;
+        }, (error) => {
+          console.error(error);
+          this.loadingSession = false;
+        });
+    }
+  }
 }

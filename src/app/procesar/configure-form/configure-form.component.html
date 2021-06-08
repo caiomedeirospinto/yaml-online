@@ -1,4 +1,4 @@
-<p *ngIf="!registrar">We are trying to get all YAMLs files from URL that you set.</p>
+<p *ngIf="!registrar && !readOnly">We are trying to get all YAMLs files from URL that you set.</p>
 <p *ngIf="registrar">We could load {{ items.length }} items.</p>
 <div class="mx-1" *ngIf="registrar">
   <mat-expansion-panel>
@@ -10,12 +10,12 @@
     </p>
   </mat-expansion-panel>
 </div>
-<mat-spinner *ngIf="!registrar" diameter="50"></mat-spinner>
+<mat-spinner *ngIf="!registrar && !readOnly" diameter="50"></mat-spinner>
 <p *ngIf="registrar">Ready to see your YAML?</p>
 <form [formGroup]="processFormGroup" *ngIf="registrar" novalidate>
   <mat-form-field class="form-field-full-width mt-1">
     <mat-label>ID Field</mat-label>
-    <input matInput placeholder="metadata.uid" formControlName="idField" required>
+    <input matInput placeholder="metadata.uid" formControlName="idField" [required]="!readOnly" [readonly]="readOnly">
     <mat-hint>Field that represents the unique identifier of its item</mat-hint>
   </mat-form-field>
   <p>
@@ -23,7 +23,7 @@
   </p>
   <mat-form-field class="form-field-full-width mx-1">
     <mat-label>Name Field</mat-label>
-    <input matInput placeholder="metadata.name" formControlName="nameField" required>
+    <input matInput placeholder="metadata.name" formControlName="nameField" [required]="!readOnly" [readonly]="readOnly">
     <mat-hint>Field that represents the name of its item</mat-hint>
   </mat-form-field>
   <p>
@@ -35,7 +35,7 @@
         Configure Custom Fields
       </mat-expansion-panel-header>
       <div>
-        <form formGroupName="customFields" novalidate>
+        <form formGroupName="customFields" novalidate *ngIf="!readOnly">
           <div>
             <mat-form-field class="mt-2">
               <mat-label>Display Name</mat-label>
@@ -65,7 +65,7 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef id="actionElement"> Action </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-icon-button color="primary" (click)="deleteCustomField(element)">
+              <button mat-icon-button color="primary" (click)="deleteCustomField(element)" [disabled]="readOnly">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
@@ -85,23 +85,23 @@
         Configure status progress bar
       </mat-expansion-panel-header>
       <div>
-        <mat-slide-toggle formControlName="enabledProgressBar">Enable progress bar</mat-slide-toggle>
-        <form formGroupName="progressField" novalidate *ngIf="processFormGroup.controls.enabledProgressBar.value">
+        <mat-slide-toggle formControlName="enabledProgressBar" *ngIf="!readOnly">Enable progress bar</mat-slide-toggle>
+        <form formGroupName="progressField" novalidate *ngIf="processFormGroup.controls.enabledProgressBar.value || readOnly">
           <p>
             <mat-form-field class="mt-2">
               <mat-label>Progress Field</mat-label>
-              <input matInput placeholder="status.current" formControlName="field" [required]="processFormGroup.controls.enabledProgressBar.value">
+              <input matInput placeholder="status.current" formControlName="field" [required]="processFormGroup.controls.enabledProgressBar.value" [readonly]="readOnly">
               <mat-hint>Field used to measure progress.</mat-hint>
             </mat-form-field>
           </p>
           <mat-form-field class="mt-2">
             <mat-label>First Status</mat-label>
-            <input matInput placeholder="OK" formControlName="firstState" [required]="processFormGroup.controls.enabledProgressBar.value">
+            <input matInput placeholder="OK" formControlName="firstState" [required]="processFormGroup.controls.enabledProgressBar.value" [readonly]="readOnly">
             <mat-hint>Value to measure the first status.</mat-hint>
           </mat-form-field>
           <mat-form-field class="mt-2">
             <mat-label>Second Status</mat-label>
-            <input matInput placeholder="NO-OK" formControlName="secondState" [required]="processFormGroup.controls.enabledProgressBar.value">
+            <input matInput placeholder="NO-OK" formControlName="secondState" [required]="processFormGroup.controls.enabledProgressBar.value" [readonly]="readOnly">
             <mat-hint>Value to measure the second status.</mat-hint>
           </mat-form-field>
         </form>
@@ -109,6 +109,5 @@
     </mat-expansion-panel>
   </div>
   <button mat-button *ngIf="registrar" (click)="doProcess()">Yes!, Go to dashboard</button>
-  <button mat-button *ngIf="registrar" (click)="reset()">Reset</button>
 </form>
-<button mat-button *ngIf="!registrar" (click)="cancelLoading()">Cancel</button>
+<button mat-button *ngIf="!registrar && !readOnly" (click)="cancelLoading()">Cancel</button>

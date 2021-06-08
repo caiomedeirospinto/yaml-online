@@ -11,7 +11,7 @@ import { configure, setCustomFields, setProgressField } from '../procesar.action
   templateUrl: './configure-form.component.html',
   styleUrls: ['./configure-form.component.scss']
 })
-export class ConfigureFormComponent implements OnInit {
+export class ConfigureFormComponent {
 
   @Input()
   registrar = false;
@@ -19,10 +19,21 @@ export class ConfigureFormComponent implements OnInit {
   readOnly = false;
   @Input()
   cancelLoading: () => void = () => {};
-  @Input()
-  reset: () => void = () => {};
 
-  processFormGroup: FormGroup = this.formBuilder.group({});
+  processFormGroup: FormGroup = this.formBuilder.group({
+    idField: [''],
+    nameField: [''],
+    customFields: this.formBuilder.group({
+      displayName: [''],
+      key: ['']
+    }),
+    enabledProgressBar: [false],
+    progressField: this.formBuilder.group({
+      field: [''],
+      firstState: [''],
+      secondState: ['']
+    }),
+  });
   procesar$: Observable<IProcesarState> | undefined;
   items: any[] = [];
   customFields: ICustomField[] = [];
@@ -38,23 +49,7 @@ export class ConfigureFormComponent implements OnInit {
       console.log('Procesar Subscribe - Items changed:', procesar);
       this.items = Object.assign([], procesar.items);
       this.customFields = Object.assign([], procesar.customFields);
-    });
-  }
-
-  ngOnInit(): void {
-    this.processFormGroup = this.formBuilder.group({
-      idField: ['', Validators.required],
-      nameField: ['', Validators.required],
-      customFields: this.formBuilder.group({
-        displayName: [''],
-        key: ['']
-      }),
-      enabledProgressBar: [false],
-      progressField: this.formBuilder.group({
-        field: [''],
-        firstState: [''],
-        secondState: ['']
-      }),
+      this.processFormGroup.patchValue(procesar);
     });
   }
 
