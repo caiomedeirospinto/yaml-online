@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, EMPTY, Observable, Subject, timer } from 'rxjs';
-import { catchError, delayWhen, map, retryWhen, scan, switchAll, take, tap } from 'rxjs/internal/operators';
+import { BehaviorSubject, EMPTY, Observable, timer } from 'rxjs';
+import { catchError, delayWhen, map, retryWhen, scan, take, tap } from 'rxjs/internal/operators';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { IOnlineSesion } from '../models/online-sesion';
 import { WsConnectionState } from '../models/ws-connection-state';
@@ -56,6 +56,7 @@ export class OnlineSessionService implements OnDestroy {
             }
 
             if (message.key === 'changed') {
+              console.log('Mensaje recibido Online Session Item changed:', message.value);
               this.store.dispatch(setItems({ items: JSON.parse(message.value) }));
             }
           },

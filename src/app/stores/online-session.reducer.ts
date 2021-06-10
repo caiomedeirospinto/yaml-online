@@ -1,6 +1,9 @@
 import { Action, createReducer, INIT, on } from '@ngrx/store';
 import { IOnlineSesion } from '../models/online-sesion';
+import { CustomItemService } from '../services/custom-item.service';
 import { setItems, configure, setCustomFields, clean, setProgressField, updateItem, set, setProcesar, setId } from './online-session.actions';
+
+const customItemService: CustomItemService = new CustomItemService();
 
 export const initialState: IOnlineSesion = {
   id: 0,
@@ -22,7 +25,7 @@ const _onlineSessionReducer = createReducer(
   on(setCustomFields, (state, { customFields }) => ({ ...state, procesar: { ...state.procesar, customFields: customFields }})),
   on(setProgressField, (state, { progressField }) => ({ ...state, procesar: { ...state.procesar, progressField: progressField }})),
   on(updateItem, (state, { updatedItem }) => ({ ...state, procesar: { ...state.procesar, items: state.procesar.items.map(item => {
-    if (item[state.procesar.idField] === updatedItem[state.procesar.idField]) {
+    if (customItemService.baseGetValue(item, state.procesar.idField) === customItemService.baseGetValue(updatedItem, state.procesar.idField)) {
       console.log('Update Item - Item:', updatedItem);
       return updatedItem;
     } else {

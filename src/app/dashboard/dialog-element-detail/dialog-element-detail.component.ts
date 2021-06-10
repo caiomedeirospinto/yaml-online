@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from "@angular/core";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
 import { CodeModel } from "@ngstack/code-editor";
 import { updateItem } from "src/app/stores/online-session.actions";
@@ -9,7 +9,6 @@ import { IOnlineSesion } from "src/app/models/online-sesion";
 import { OnlineSessionService } from "src/app/services/online-session.service";
 import { WsConnectionState } from "src/app/models/ws-connection-state";
 import { Observable, Subscription } from "rxjs";
-import { skip } from "rxjs/internal/operators";
 import { ofType, Actions } from '@ngrx/effects';
 
 @Component({
@@ -19,7 +18,16 @@ import { ofType, Actions } from '@ngrx/effects';
 })
 export class DialogElementDetail implements OnInit, OnDestroy {
 
-  _onlineSession: IOnlineSesion | undefined;
+  _onlineSession: IOnlineSesion = {
+    id: 0,
+    procesar: {
+      customFields: [],
+      idField: '',
+      nameField: '',
+      items: []
+    }
+  };
+  lastVersion = '';
   updateSubscription = new Subscription();
   procesar$: Observable<IOnlineSesion> | undefined;
   options = {
@@ -39,10 +47,11 @@ export class DialogElementDetail implements OnInit, OnDestroy {
     private customItemService: CustomItemService,
     private onlineSessionService: OnlineSessionService,
     private actions: Actions,
-    @Inject(MAT_DIALOG_DATA) public input: any
+    @Inject(MAT_DIALOG_DATA) public input: any,
+    private dialogRef: MatDialogRef<DialogElementDetail>
   ) {
     console.log('Dialog Detail - Element:', input);
-    this.codeModel.value = YAML.stringify(input.data);
+    this.codeModel.value = this.lastVersion = YAML.stringify(input.data);
     this.procesar$ = store.select('onlineSession');
     this.procesar$.subscribe(onlineSession => {
       this._onlineSession = onlineSession;
@@ -52,7 +61,7 @@ export class DialogElementDetail implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.updateSubscription = this.actions.pipe(ofType('[Procesar Component] Update Item'))
       .subscribe((data: any) => {
-        console.log('Update Item Action subscribe:', data);
+        console.log('Update Item Action subscribe:', data, this._onlineSession?.procesar.items);
         this.onlineSessionService.sendMessage({
           key: 'changed',
           value: JSON.stringify(this._onlineSession?.procesar.items)
@@ -68,12 +77,26 @@ export class DialogElementDetail implements OnInit, OnDestroy {
 
   save(value: any) {
     const updatedItem = YAML.parse(value);
+    if (this.isIdEdited(updatedItem)) {
+      this.dialogRef.close();
+      alert('Cannot change ID Field');
+      // this.codeModel.value = this.lastVersion;
+      return;
+    }
     if (updatedItem) {
+      console.log('Update Item Action dispatched:', updatedItem);
       this.store.dispatch(updateItem({ updatedItem: updatedItem }));
+      // this.lastVersion = value;
     }
   }
 
   get readOnly() {
     return ![WsConnectionState.CONNECTED].includes(this.onlineSessionService.state);
+  }
+
+  isIdEdited(updatedItem: any): boolean {
+    return this._onlineSession?.procesar.items.filter(item => {
+      return this.customItemService.baseGetValue(updatedItem, this._onlineSession?.procesar.idField) === this.customItemService.baseGetValue(item, this._onlineSession?.procesar.idField);
+    }).length === 0;
   }
 }
