@@ -1,6 +1,6 @@
 {
   "onlineSession": {
-    "enabled": true,
+    "enabled": false,
     "backends": {
       "apiRest": "http://localhost:8080/online-session",
       "ws": "ws://localhost:8081/online-session"
