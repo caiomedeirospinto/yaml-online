@@ -96,6 +96,7 @@ export class OnlineSessionComponent implements OnInit {
   }
 
   closeConnection() {
+    this.snackBar.dismiss();
     this.store.dispatch(clean());
     this.onlineSessionService.close();
     this.router.navigate(["/"])

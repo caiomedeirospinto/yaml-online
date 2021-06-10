@@ -8,6 +8,7 @@ import { clean } from '../stores/online-session.actions';
 import { DialogElementDetail } from './dialog-element-detail/dialog-element-detail.component';
 import { CustomItemService } from '../services/custom-item.service';
 import { IOnlineSesion } from '../models/online-sesion';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,6 +36,7 @@ export class DashboardComponent {
     private router: Router,
     private store: Store<{ onlineSession: IOnlineSesion }>,
     private customItemService: CustomItemService,
+    private snackBar: MatSnackBar,
     public dialog: MatDialog
   ) {
     this.procesar$ = store.select('onlineSession');
@@ -69,6 +71,7 @@ export class DashboardComponent {
   }
 
   goToHome() {
+    this.snackBar.dismiss();
     this.store.dispatch(clean());
     this.router.navigate([""]);
   }
