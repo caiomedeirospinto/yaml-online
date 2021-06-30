@@ -24,7 +24,8 @@ export class DialogElementDetail implements OnInit, OnDestroy {
       customFields: [],
       idField: '',
       nameField: '',
-      items: []
+      items: [],
+      editionFields: []
     }
   };
   lastVersion = '';

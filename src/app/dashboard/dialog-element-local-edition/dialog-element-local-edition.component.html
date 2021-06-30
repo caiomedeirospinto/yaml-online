@@ -1,0 +1,23 @@
+<div mat-dialog-content>
+  <h2>Element Detail</h2>
+  <p>
+    ID: {{ getValue(input.data, input.procesar.idField) }}
+  </p>
+  <p>
+    Name: {{
+      getValue(input.data, input.procesar.nameField)
+    }}
+  </p>
+  <form [formGroup]="localEditionFormGroup" novalidate>
+    <mat-form-field class="form-field-full-width mt-1" *ngFor="let editionField of _onlineSession.procesar.editionFields">
+      <mat-label>{{ editionField.displayName }}</mat-label>
+      <textarea matInput placeholder="no value" [formControlName]="editionField.key.split('.').reverse()[0]" rows="10"></textarea>
+      <mat-hint>Field: {{ editionField.key }}</mat-hint>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="save()">
+    Save changes
+  </button>
+</div>

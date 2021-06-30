@@ -15,4 +15,5 @@ export interface IProcesarState {
   nameField: string;
   customFields: ICustomField[];
   progressField?: IProgressField;
+  editionFields: ICustomField[];
 }

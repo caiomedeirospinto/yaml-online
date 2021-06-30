@@ -17,6 +17,7 @@ import { ConfigureFormComponent } from './procesar/configure-form/configure-form
 import { ConfigService } from './services/config.service';
 import { OnlineSessionComponent } from './dashboard/online-session/online-session.component';
 import { EffectsModule } from '@ngrx/effects';
+import { DialogElementLocalEditionComponent } from './dashboard/dialog-element-local-edition/dialog-element-local-edition.component';
 
 export function initConfig(configService: ConfigService): () => void {
   return () => configService.loadConfig();
@@ -31,7 +32,8 @@ export function initConfig(configService: ConfigService): () => void {
     ItemsProgressBarComponent,
     ConfigureFormComponent,
     DialogCreateOnlineSession,
-    OnlineSessionComponent
+    OnlineSessionComponent,
+    DialogElementLocalEditionComponent
   ],
   imports: [
     BrowserModule,

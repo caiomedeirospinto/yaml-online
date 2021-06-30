@@ -36,7 +36,7 @@ export class ProcesarComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerFormGroup = this.formBuilder.group({
-      url: ['assets/example.json', Validators.required],
+      url: ['assets/ocp-items.json', Validators.required],
       itemsField: ['items', Validators.required]
     });
     this.onlineSessionFormGroup = this.formBuilder.group({

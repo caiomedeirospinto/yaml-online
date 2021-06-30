@@ -39,6 +39,9 @@
           <button mat-button color="primary" (click)="openDetail(element)">
             Detail
           </button>
+          <button mat-button color="primary" (click)="openLocalEdit(element)" *ngIf="isLocalEditionEnabled()">
+            Local edit
+          </button>
         </td>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

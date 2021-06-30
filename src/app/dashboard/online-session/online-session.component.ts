@@ -26,7 +26,8 @@ export class OnlineSessionComponent implements OnInit {
       items: [],
       idField: '',
       nameField: '',
-      customFields: []
+      customFields: [],
+      editionFields: []
     }
   };
   procesar$: Observable<IOnlineSesion> | undefined;

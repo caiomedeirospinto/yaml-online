@@ -29,7 +29,7 @@
   <p>
     Value of Name field for first item: {{ getValue(this.processFormGroup.value.nameField) }}
   </p>
-  <div class="mb-2" *ngIf="registrar">
+  <div class="mb-2" *ngIf="registrar && featureService.isEnabled('customColumns')">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         Configure Custom Fields
@@ -79,7 +79,7 @@
       </div>
     </mat-expansion-panel>
   </div>
-  <div class="mb-2" *ngIf="registrar">
+  <div class="mb-2" *ngIf="registrar && featureService.isEnabled('statusBar')">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         Configure status progress bar
@@ -105,6 +105,56 @@
             <mat-hint>Value to measure the second status.</mat-hint>
           </mat-form-field>
         </form>
+      </div>
+    </mat-expansion-panel>
+  </div>
+  <div class="mb-2" *ngIf="registrar && featureService.isEnabled('localEdition')">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        Local edition
+      </mat-expansion-panel-header>
+      <div>
+        <form formGroupName="editionFields" novalidate *ngIf="!readOnly">
+          <div>
+            <mat-form-field class="mt-2">
+              <mat-label>Display Name</mat-label>
+              <input matInput placeholder="Status" formControlName="displayName">
+              <mat-hint>Fancy name for column.</mat-hint>
+            </mat-form-field>
+            <mat-form-field class="mt-2">
+              <mat-label>Key</mat-label>
+              <input matInput placeholder="status" formControlName="key">
+              <mat-hint>Key used to get value from items.</mat-hint>
+            </mat-form-field>
+          </div>
+          <button mat-mini-fab color="primary" (click)="addEditionField()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </form>
+        <table mat-table [dataSource]="editionFields" class="mat-elevation-z2">
+          <caption class="mx-1">List of edition fields</caption>
+          <ng-container matColumnDef="displayName">
+            <th mat-header-cell *matHeaderCellDef id="displayName"> Display Name </th>
+            <td mat-cell *matCellDef="let element"> {{ element.displayName }} </td>
+          </ng-container>
+          <ng-container matColumnDef="key">
+            <th mat-header-cell *matHeaderCellDef id="key"> Key </th>
+            <td mat-cell *matCellDef="let element"> {{ element.key }} </td>
+          </ng-container>
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef id="actionElement"> Action </th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button color="primary" (click)="deleteEditionField(element)" [disabled]="readOnly">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No edition fields added.</td>
+          </tr>
+        </table>
       </div>
     </mat-expansion-panel>
   </div>

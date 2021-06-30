@@ -1,0 +1,375 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "managedFields": [
+          {
+            "apiVersion": "v1",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:spec": {
+                "f:ports": {
+                  ".": {},
+                  "k:{\"port\":8080,\"protocol\":\"TCP\"}": {
+                    ".": {},
+                    "f:port": {},
+                    "f:protocol": {},
+                    "f:targetPort": {}
+                  }
+                },
+                "f:selector": {
+                  ".": {},
+                  "f:app": {}
+                },
+                "f:sessionAffinity": {},
+                "f:type": {}
+              }
+            },
+            "manager": "oc.exe",
+            "operation": "Update",
+            "time": "2021-06-16T15:03:17Z"
+          }
+        ],
+        "name": "app-test-cert",
+        "namespace": "sandbox-pre"
+      },
+      "spec": {
+        "ports": [
+          {
+            "port": 8080,
+            "protocol": "TCP",
+            "targetPort": 8080
+          }
+        ],
+        "selector": {
+          "app": "app-test-cert"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "deployment.kubernetes.io/revision": "2",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{},\"name\":\"app-test-cert\",\"namespace\":\"sandbox-pre\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"app-test-cert\"}},\"template\":{\"metadata\":{\"labels\":{\"app\":\"app-test-cert\"}},\"spec\":{\"containers\":[{\"image\":\"registry.global.ccc.srvb.cl.paas.cloudcenter.corp/sandbox-chi/target:latest\",\"name\":\"app-test-cert\",\"ports\":[{\"containerPort\":8080}]}]}}}}\n"
+        },
+        "creationTimestamp": "2021-06-16T15:02:19Z",
+        "generation": 4,
+        "managedFields": [
+          {
+            "apiVersion": "apps/v1",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:kubectl.kubernetes.io/last-applied-configuration": {}
+                }
+              },
+              "f:spec": {
+                "f:progressDeadlineSeconds": {},
+                "f:revisionHistoryLimit": {},
+                "f:selector": {
+                  "f:matchLabels": {
+                    ".": {},
+                    "f:app": {}
+                  }
+                },
+                "f:strategy": {
+                  "f:rollingUpdate": {
+                    ".": {},
+                    "f:maxSurge": {},
+                    "f:maxUnavailable": {}
+                  },
+                  "f:type": {}
+                },
+                "f:template": {
+                  "f:metadata": {
+                    "f:labels": {
+                      ".": {},
+                      "f:app": {}
+                    }
+                  },
+                  "f:spec": {
+                    "f:containers": {
+                      "k:{\"name\":\"app-test-cert\"}": {
+                        ".": {},
+                        "f:image": {},
+                        "f:imagePullPolicy": {},
+                        "f:name": {},
+                        "f:ports": {
+                          ".": {},
+                          "k:{\"containerPort\":8080,\"protocol\":\"TCP\"}": {
+                            ".": {},
+                            "f:containerPort": {},
+                            "f:protocol": {}
+                          }
+                        },
+                        "f:resources": {},
+                        "f:terminationMessagePath": {},
+                        "f:terminationMessagePolicy": {}
+                      }
+                    },
+                    "f:dnsPolicy": {},
+                    "f:restartPolicy": {},
+                    "f:schedulerName": {},
+                    "f:securityContext": {},
+                    "f:terminationGracePeriodSeconds": {}
+                  }
+                }
+              }
+            },
+            "manager": "oc.exe",
+            "operation": "Update",
+            "time": "2021-06-16T15:02:19Z"
+          },
+          {
+            "apiVersion": "apps/v1",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:spec": {
+                "f:replicas": {},
+                "f:template": {
+                  "f:spec": {
+                    "f:containers": {
+                      "k:{\"name\":\"app-test-cert\"}": {
+                        "f:env": {
+                          ".": {},
+                          "k:{\"name\":\"ENV\"}": {
+                            ".": {},
+                            "f:name": {},
+                            "f:value": {}
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "manager": "Mozilla",
+            "operation": "Update",
+            "time": "2021-06-16T15:10:40Z"
+          },
+          {
+            "apiVersion": "apps/v1",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  "f:deployment.kubernetes.io/revision": {}
+                }
+              },
+              "f:status": {
+                "f:availableReplicas": {},
+                "f:conditions": {
+                  ".": {},
+                  "k:{\"type\":\"Available\"}": {
+                    ".": {},
+                    "f:lastTransitionTime": {},
+                    "f:lastUpdateTime": {},
+                    "f:message": {},
+                    "f:reason": {},
+                    "f:status": {},
+                    "f:type": {}
+                  },
+                  "k:{\"type\":\"Progressing\"}": {
+                    ".": {},
+                    "f:lastTransitionTime": {},
+                    "f:lastUpdateTime": {},
+                    "f:message": {},
+                    "f:reason": {},
+                    "f:status": {},
+                    "f:type": {}
+                  }
+                },
+                "f:observedGeneration": {},
+                "f:readyReplicas": {},
+                "f:replicas": {},
+                "f:updatedReplicas": {}
+              }
+            },
+            "manager": "kube-controller-manager",
+            "operation": "Update",
+            "time": "2021-06-16T15:10:45Z"
+          }
+        ],
+        "name": "app-test-cert",
+        "namespace": "sandbox-pre",
+        "resourceVersion": "102599155",
+        "selfLink": "/apis/apps/v1/namespaces/sandbox-pre/deployments/app-test-cert",
+        "uid": "a8972e04-62ec-4b78-b880-cb5ca2117626"
+      },
+      "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 1,
+        "revisionHistoryLimit": 10,
+        "selector": {
+          "matchLabels": {
+            "app": "app-test-cert"
+          }
+        },
+        "strategy": {
+          "rollingUpdate": {
+            "maxSurge": "25%",
+            "maxUnavailable": "25%"
+          },
+          "type": "RollingUpdate"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "app-test-cert"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "env": [
+                  {
+                    "name": "ENV",
+                    "value": "Prueba"
+                  }
+                ],
+                "image": "registry.global.ccc.srvb.cl.paas.cloudcenter.corp/sandbox-chi/target:latest",
+                "imagePullPolicy": "Always",
+                "name": "app-test-cert",
+                "ports": [
+                  {
+                    "containerPort": 8080,
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {},
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {},
+            "terminationGracePeriodSeconds": 30
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 1,
+        "conditions": [
+          {
+            "lastTransitionTime": "2021-06-16T15:02:19Z",
+            "lastUpdateTime": "2021-06-16T15:09:24Z",
+            "message": "ReplicaSet \"app-test-cert-5d8969c474\" has successfully progressed.",
+            "reason": "NewReplicaSetAvailable",
+            "status": "True",
+            "type": "Progressing"
+          },
+          {
+            "lastTransitionTime": "2021-06-16T15:10:45Z",
+            "lastUpdateTime": "2021-06-16T15:10:45Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          }
+        ],
+        "observedGeneration": 4,
+        "readyReplicas": 1,
+        "replicas": 1,
+        "updatedReplicas": 1
+      }
+    },
+    {
+      "apiVersion": "route.openshift.io/v1",
+      "kind": "Route",
+      "metadata": {
+        "creationTimestamp": "2021-06-16T15:06:28Z",
+        "managedFields": [
+          {
+            "apiVersion": "route.openshift.io/v1",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:spec": {
+                "f:host": {},
+                "f:port": {
+                  ".": {},
+                  "f:targetPort": {}
+                },
+                "f:tls": {
+                  ".": {},
+                  "f:caCertificate": {},
+                  "f:insecureEdgeTerminationPolicy": {},
+                  "f:termination": {}
+                },
+                "f:to": {
+                  "f:kind": {},
+                  "f:name": {},
+                  "f:weight": {}
+                },
+                "f:wildcardPolicy": {}
+              }
+            },
+            "manager": "Mozilla",
+            "operation": "Update",
+            "time": "2021-06-16T15:06:28Z"
+          },
+          {
+            "apiVersion": "route.openshift.io/v1",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:spec": {
+                "f:tls": {
+                  "f:certificate": {},
+                  "f:key": {}
+                }
+              },
+              "f:status": {
+                "f:ingress": {}
+              }
+            },
+            "manager": "openshift-router",
+            "operation": "Update",
+            "time": "2021-06-16T15:06:28Z"
+          }
+        ],
+        "name": "app-test-cert",
+        "namespace": "sandbox-pre",
+        "resourceVersion": "102597814"
+      },
+      "spec": {
+        "host": "app-test-cert.hcaas.cl.corp",
+        "port": {
+          "targetPort": 8080
+        },
+        "tls": {
+          "caCertificate": "-----BEGIN CERTIFICATE-----\nMIIEIzCCAwugAwIBAgIUIJHBbSAJQd+0XGDo4KrXYJxSD40wDQYJKoZIhvcNAQEF\nBQAwgaAxCzAJBgNVBAYTAkNMMREwDwYDVQQIDAhTYW50aWFnbzERMA8GA1UEBwwI\nU2FudGlhZ28xGDAWBgNVBAoMD1NhbnRhbmRlciBDaGlsZTENMAsGA1UECwwEQ0Nv\nRTEYMBYGA1UEAwwPKi5oY2Fhcy5jbC5jb3JwMSgwJgYJKoZIhvcNAQkBFhlqb3Jn\nZS5vc29yaW9Ac2FudGFuZGVyLmNsMB4XDTIxMDYxNDE1MjQ1NVoXDTMxMDYxMjE1\nMjQ1NVowgaAxCzAJBgNVBAYTAkNMMREwDwYDVQQIDAhTYW50aWFnbzERMA8GA1UE\nBwwIU2FudGlhZ28xGDAWBgNVBAoMD1NhbnRhbmRlciBDaGlsZTENMAsGA1UECwwE\nQ0NvRTEYMBYGA1UEAwwPKi5oY2Fhcy5jbC5jb3JwMSgwJgYJKoZIhvcNAQkBFhlq\nb3JnZS5vc29yaW9Ac2FudGFuZGVyLmNsMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A\nMIIBCgKCAQEAtDzebAVGrvGLpsZi4BMxK3GBktBLAtKAHCwez/SG9UI1kMi1Kctl\nBTlZju+iRohg7X7zZdO+zhMyUF5ZDTIvKjcyrDOLoe1IAlmrS4B2CdXPJF5zeMv+\nCacwUsZ4jrR8ji5Yn79/khLkAwJ0eC+iddH/a6V2CE3827DXWIlvXYS2PTbyIjNV\nMWcsQR8aQxPcnYLBlLn786QTBgE6VBZULY91oNlrgIbMW6Q3CKXvzgBY4tfVkAqr\nd/+dbVEVWv4G57ZQ7/R78Bsi2E8f890sjWI6RcQ5KujwI9y/246StnwGhnYFg2kC\nmMkRo9ATZaU8weJFem1zl/a8z6LXdDsNAQIDAQABo1MwUTAdBgNVHQ4EFgQUHfZB\nCK2Sn7avSQKtq72aG2gahK8wHwYDVR0jBBgwFoAUHfZBCK2Sn7avSQKtq72aG2ga\nhK8wDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEASF2ctxtIHj38\n7WVvKJzVpGFmBQpTYaPstQaszF9psOXuv+OFBNN6gS48J1xRH5Fll+gfQDTYMuAD\nC16tWwQDs7uYM0h2hXYCHZY7c5UyAqkVxFf6RfS//xqgXtziJ3aLR4D3M/4Pyagk\n2S8JIreLIialcbOWTvvZsj0kXfR11W0Un1ZdPYKoTdYRFpubKbLvB9jZmvSJxONN\nuu3BvNfoIKEOLN/vTUW7PRBTsncfBlatwMU3kyQsLijMQANCStXil0mxedeqsGn1\nzCAorbw+DZuFAtXSEDikF3ztez9YHGsXiJstCovagbxfwlRSUIAjJcOE4Z+Phgfs\noYGaydRWWQ==\n-----END CERTIFICATE-----\n-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAtDzebAVGrvGLpsZi4BMxK3GBktBLAtKAHCwez/SG9UI1kMi1\nKctlBTlZju+iRohg7X7zZdO+zhMyUF5ZDTIvKjcyrDOLoe1IAlmrS4B2CdXPJF5z\neMv+CacwUsZ4jrR8ji5Yn79/khLkAwJ0eC+iddH/a6V2CE3827DXWIlvXYS2PTby\nIjNVMWcsQR8aQxPcnYLBlLn786QTBgE6VBZULY91oNlrgIbMW6Q3CKXvzgBY4tfV\nkAqrd/+dbVEVWv4G57ZQ7/R78Bsi2E8f890sjWI6RcQ5KujwI9y/246StnwGhnYF\ng2kCmMkRo9ATZaU8weJFem1zl/a8z6LXdDsNAQIDAQABAoIBAET14RgtcJzw+EDI\nOP6I+VAo7q2wmnKq/a9JxkREx/pA6ePKl141XyJ/jd+dmlYoSgW0hAYa3S9VsvOD\nFclxwRAC7JVsZ2l+MwYLLvoFXaRntQiyRrYaPsmMuXWCUJAxSFLSMsB0caf/KFRq\ndQujFiLERVj3htConi2kXNCYTQ7XWpTC+WMf9pPoeKOkqv6O24YfI89Df25K4gFe\nFT1WjXi64CSAfs3oTIuKcsaaHc/kCSL4jnTW6kaDBYaH33plLfB039MPUSPHVSSi\nbyZjq3XvZWOAhVhZmnk6MwLoocEoXioIEAGB7qInQqQ2PbTO3yS6lyeyLDP2RlCH\n33BcXQECgYEA4mhM3s6cjocQAYu2gk+3qT3dM386LYeM29Y15PhntfapJvxhSDCI\nMBt4eqDv1jPEoNuZBn5v8kPtyziBvTbQ05okmEbFmiWW7Mw2yVFINn5S43m0Iq0z\nVSySeCGG4R6r5WPLx8YfpqxQnrcO8ZM3JCI0hPGdZmOvJwYg4JmiqZECgYEAy8u1\nxXgFy7holBQRFSAb/jvq1iXXYA+hpDMm+g0p+DemzmNzEiq1edtfsC8Z+Vx313FF\n1rjE02LV8Vl1H730IGi/nA4M317X9ZsklOdiejPoMWlUNNMM0Mqgo4nYcB9Z8+Im\nULZ6QBT2QtgU5p4KNUu1mBT76X2OwHbcY5TQ9HECgYEA4HrPdL5gRYSunwm6fHuz\nuu7mqk+EDG5wf+tk5lBQ6/7Teh8UCXJtJV2nV9bH1ZbgZyk0EVc9gXROiobNRCDc\nbmFP1VeeRpbsjH5x96tKsRUQ9A/QRe16jwGxe8CqLfyuLLOE8d+DtEr3aFZST71K\nF95+Oi4hhMpjeIrAAFD0EbECgYEAsgElrOxvy4gwOB7q6NPZ/48gSJpW673bhwty\n4Pf8j6U0WpM84EJTrrMxejc57beZqaFzyeArcyOiESP9DJOjF2fG7SzMi5JQ+WLg\naftM5cZO6lHAzj8Fs505AH8XgJ+xtzbyFo+8ahqlGq+YWfLyoaiWXdb+TexwcqWf\nTI+gj9ECgYEAy6kPdFEfBK7udxJdQ0MjEeCpyCnPreCjTjpuNntolk0skywdoDiV\nWUEFNpkgHal7XtGP+rnJ9lG5r7HsiEhatd4jzxU7ml/WR0L87TaZJqmPbSFJUynp\n9o1XyvW7xafIlSL59vxVFrE7VpiFKtD+7thY5wS+mWazHLgzkVNVhYY=\n-----END RSA PRIVATE KEY-----\n",
+          "certificate": "-----BEGIN CERTIFICATE-----\nMIIEIzCCAwugAwIBAgIUIJHBbSAJQd+0XGDo4KrXYJxSD40wDQYJKoZIhvcNAQEF\nBQAwgaAxCzAJBgNVBAYTAkNMMREwDwYDVQQIDAhTYW50aWFnbzERMA8GA1UEBwwI\nU2FudGlhZ28xGDAWBgNVBAoMD1NhbnRhbmRlciBDaGlsZTENMAsGA1UECwwEQ0Nv\nRTEYMBYGA1UEAwwPKi5oY2Fhcy5jbC5jb3JwMSgwJgYJKoZIhvcNAQkBFhlqb3Jn\nZS5vc29yaW9Ac2FudGFuZGVyLmNsMB4XDTIxMDYxNDE1MjQ1NVoXDTMxMDYxMjE1\nMjQ1NVowgaAxCzAJBgNVBAYTAkNMMREwDwYDVQQIDAhTYW50aWFnbzERMA8GA1UE\nBwwIU2FudGlhZ28xGDAWBgNVBAoMD1NhbnRhbmRlciBDaGlsZTENMAsGA1UECwwE\nQ0NvRTEYMBYGA1UEAwwPKi5oY2Fhcy5jbC5jb3JwMSgwJgYJKoZIhvcNAQkBFhlq\nb3JnZS5vc29yaW9Ac2FudGFuZGVyLmNsMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A\nMIIBCgKCAQEAtDzebAVGrvGLpsZi4BMxK3GBktBLAtKAHCwez/SG9UI1kMi1Kctl\nBTlZju+iRohg7X7zZdO+zhMyUF5ZDTIvKjcyrDOLoe1IAlmrS4B2CdXPJF5zeMv+\nCacwUsZ4jrR8ji5Yn79/khLkAwJ0eC+iddH/a6V2CE3827DXWIlvXYS2PTbyIjNV\nMWcsQR8aQxPcnYLBlLn786QTBgE6VBZULY91oNlrgIbMW6Q3CKXvzgBY4tfVkAqr\nd/+dbVEVWv4G57ZQ7/R78Bsi2E8f890sjWI6RcQ5KujwI9y/246StnwGhnYFg2kC\nmMkRo9ATZaU8weJFem1zl/a8z6LXdDsNAQIDAQABo1MwUTAdBgNVHQ4EFgQUHfZB\nCK2Sn7avSQKtq72aG2gahK8wHwYDVR0jBBgwFoAUHfZBCK2Sn7avSQKtq72aG2ga\nhK8wDwYDVR0TAQH/BAUwAwEB/zANBgkqhkiG9w0BAQUFAAOCAQEASF2ctxtIHj38\n7WVvKJzVpGFmBQpTYaPstQaszF9psOXuv+OFBNN6gS48J1xRH5Fll+gfQDTYMuAD\nC16tWwQDs7uYM0h2hXYCHZY7c5UyAqkVxFf6RfS//xqgXtziJ3aLR4D3M/4Pyagk\n2S8JIreLIialcbOWTvvZsj0kXfR11W0Un1ZdPYKoTdYRFpubKbLvB9jZmvSJxONN\nuu3BvNfoIKEOLN/vTUW7PRBTsncfBlatwMU3kyQsLijMQANCStXil0mxedeqsGn1\nzCAorbw+DZuFAtXSEDikF3ztez9YHGsXiJstCovagbxfwlRSUIAjJcOE4Z+Phgfs\noYGaydRWWQ==\n-----END CERTIFICATE-----\n-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAtDzebAVGrvGLpsZi4BMxK3GBktBLAtKAHCwez/SG9UI1kMi1\nKctlBTlZju+iRohg7X7zZdO+zhMyUF5ZDTIvKjcyrDOLoe1IAlmrS4B2CdXPJF5z\neMv+CacwUsZ4jrR8ji5Yn79/khLkAwJ0eC+iddH/a6V2CE3827DXWIlvXYS2PTby\nIjNVMWcsQR8aQxPcnYLBlLn786QTBgE6VBZULY91oNlrgIbMW6Q3CKXvzgBY4tfV\nkAqrd/+dbVEVWv4G57ZQ7/R78Bsi2E8f890sjWI6RcQ5KujwI9y/246StnwGhnYF\ng2kCmMkRo9ATZaU8weJFem1zl/a8z6LXdDsNAQIDAQABAoIBAET14RgtcJzw+EDI\nOP6I+VAo7q2wmnKq/a9JxkREx/pA6ePKl141XyJ/jd+dmlYoSgW0hAYa3S9VsvOD\nFclxwRAC7JVsZ2l+MwYLLvoFXaRntQiyRrYaPsmMuXWCUJAxSFLSMsB0caf/KFRq\ndQujFiLERVj3htConi2kXNCYTQ7XWpTC+WMf9pPoeKOkqv6O24YfI89Df25K4gFe\nFT1WjXi64CSAfs3oTIuKcsaaHc/kCSL4jnTW6kaDBYaH33plLfB039MPUSPHVSSi\nbyZjq3XvZWOAhVhZmnk6MwLoocEoXioIEAGB7qInQqQ2PbTO3yS6lyeyLDP2RlCH\n33BcXQECgYEA4mhM3s6cjocQAYu2gk+3qT3dM386LYeM29Y15PhntfapJvxhSDCI\nMBt4eqDv1jPEoNuZBn5v8kPtyziBvTbQ05okmEbFmiWW7Mw2yVFINn5S43m0Iq0z\nVSySeCGG4R6r5WPLx8YfpqxQnrcO8ZM3JCI0hPGdZmOvJwYg4JmiqZECgYEAy8u1\nxXgFy7holBQRFSAb/jvq1iXXYA+hpDMm+g0p+DemzmNzEiq1edtfsC8Z+Vx313FF\n1rjE02LV8Vl1H730IGi/nA4M317X9ZsklOdiejPoMWlUNNMM0Mqgo4nYcB9Z8+Im\nULZ6QBT2QtgU5p4KNUu1mBT76X2OwHbcY5TQ9HECgYEA4HrPdL5gRYSunwm6fHuz\nuu7mqk+EDG5wf+tk5lBQ6/7Teh8UCXJtJV2nV9bH1ZbgZyk0EVc9gXROiobNRCDc\nbmFP1VeeRpbsjH5x96tKsRUQ9A/QRe16jwGxe8CqLfyuLLOE8d+DtEr3aFZST71K\nF95+Oi4hhMpjeIrAAFD0EbECgYEAsgElrOxvy4gwOB7q6NPZ/48gSJpW673bhwty\n4Pf8j6U0WpM84EJTrrMxejc57beZqaFzyeArcyOiESP9DJOjF2fG7SzMi5JQ+WLg\naftM5cZO6lHAzj8Fs505AH8XgJ+xtzbyFo+8ahqlGq+YWfLyoaiWXdb+TexwcqWf\nTI+gj9ECgYEAy6kPdFEfBK7udxJdQ0MjEeCpyCnPreCjTjpuNntolk0skywdoDiV\nWUEFNpkgHal7XtGP+rnJ9lG5r7HsiEhatd4jzxU7ml/WR0L87TaZJqmPbSFJUynp\n9o1XyvW7xafIlSL59vxVFrE7VpiFKtD+7thY5wS+mWazHLgzkVNVhYY=\n-----END RSA PRIVATE KEY-----\n",
+          "insecureEdgeTerminationPolicy": "None",
+          "key": "-----BEGIN RSA PRIVATE KEY-----\nMIIEpQIBAAKCAQEAtDzebAVGrvGLpsZi4BMxK3GBktBLAtKAHCwez/SG9UI1kMi1\nKctlBTlZju+iRohg7X7zZdO+zhMyUF5ZDTIvKjcyrDOLoe1IAlmrS4B2CdXPJF5z\neMv+CacwUsZ4jrR8ji5Yn79/khLkAwJ0eC+iddH/a6V2CE3827DXWIlvXYS2PTby\nIjNVMWcsQR8aQxPcnYLBlLn786QTBgE6VBZULY91oNlrgIbMW6Q3CKXvzgBY4tfV\nkAqrd/+dbVEVWv4G57ZQ7/R78Bsi2E8f890sjWI6RcQ5KujwI9y/246StnwGhnYF\ng2kCmMkRo9ATZaU8weJFem1zl/a8z6LXdDsNAQIDAQABAoIBAET14RgtcJzw+EDI\nOP6I+VAo7q2wmnKq/a9JxkREx/pA6ePKl141XyJ/jd+dmlYoSgW0hAYa3S9VsvOD\nFclxwRAC7JVsZ2l+MwYLLvoFXaRntQiyRrYaPsmMuXWCUJAxSFLSMsB0caf/KFRq\ndQujFiLERVj3htConi2kXNCYTQ7XWpTC+WMf9pPoeKOkqv6O24YfI89Df25K4gFe\nFT1WjXi64CSAfs3oTIuKcsaaHc/kCSL4jnTW6kaDBYaH33plLfB039MPUSPHVSSi\nbyZjq3XvZWOAhVhZmnk6MwLoocEoXioIEAGB7qInQqQ2PbTO3yS6lyeyLDP2RlCH\n33BcXQECgYEA4mhM3s6cjocQAYu2gk+3qT3dM386LYeM29Y15PhntfapJvxhSDCI\nMBt4eqDv1jPEoNuZBn5v8kPtyziBvTbQ05okmEbFmiWW7Mw2yVFINn5S43m0Iq0z\nVSySeCGG4R6r5WPLx8YfpqxQnrcO8ZM3JCI0hPGdZmOvJwYg4JmiqZECgYEAy8u1\nxXgFy7holBQRFSAb/jvq1iXXYA+hpDMm+g0p+DemzmNzEiq1edtfsC8Z+Vx313FF\n1rjE02LV8Vl1H730IGi/nA4M317X9ZsklOdiejPoMWlUNNMM0Mqgo4nYcB9Z8+Im\nULZ6QBT2QtgU5p4KNUu1mBT76X2OwHbcY5TQ9HECgYEA4HrPdL5gRYSunwm6fHuz\nuu7mqk+EDG5wf+tk5lBQ6/7Teh8UCXJtJV2nV9bH1ZbgZyk0EVc9gXROiobNRCDc\nbmFP1VeeRpbsjH5x96tKsRUQ9A/QRe16jwGxe8CqLfyuLLOE8d+DtEr3aFZST71K\nF95+Oi4hhMpjeIrAAFD0EbECgYEAsgElrOxvy4gwOB7q6NPZ/48gSJpW673bhwty\n4Pf8j6U0WpM84EJTrrMxejc57beZqaFzyeArcyOiESP9DJOjF2fG7SzMi5JQ+WLg\naftM5cZO6lHAzj8Fs505AH8XgJ+xtzbyFo+8ahqlGq+YWfLyoaiWXdb+TexwcqWf\nTI+gj9ECgYEAy6kPdFEfBK7udxJdQ0MjEeCpyCnPreCjTjpuNntolk0skywdoDiV\nWUEFNpkgHal7XtGP+rnJ9lG5r7HsiEhatd4jzxU7ml/WR0L87TaZJqmPbSFJUynp\n9o1XyvW7xafIlSL59vxVFrE7VpiFKtD+7thY5wS+mWazHLgzkVNVhYY=\n-----END RSA PRIVATE KEY-----\n",
+          "termination": "edge"
+        },
+        "to": {
+          "kind": "Service",
+          "name": "app-test-cert",
+          "weight": 100
+        },
+        "wildcardPolicy": "None"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": "",
+    "selfLink": ""
+  }
+}

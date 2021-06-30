@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { IOnlineSesion } from 'src/app/models/online-sesion';
 import { ICustomField, IProgressField } from 'src/app/models/procesar';
-import { configure, setCustomFields, setProgressField } from '../../stores/online-session.actions';
+import { FeatureTogglesService } from 'src/app/services/feature-toggles.service';
+import { configure, setCustomFields, setEditionFields, setProgressField } from '../../stores/online-session.actions';
 
 @Component({
   selector: 'app-configure-form',
@@ -34,15 +35,21 @@ export class ConfigureFormComponent {
       firstState: [''],
       secondState: ['']
     }),
+    editionFields: this.formBuilder.group({
+      displayName: [''],
+      key: ['']
+    })
   });
   procesar$: Observable<IOnlineSesion> | undefined;
   items: any[] = [];
   customFields: ICustomField[] = [];
+  editionFields: ICustomField[] = [];
   displayedColumns: string[] = ['displayName', 'key', 'action'];
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    public featureService: FeatureTogglesService,
     private store: Store<{ onlineSession: IOnlineSesion }>
   ) {
     this.procesar$ = store.select('onlineSession');
@@ -50,6 +57,7 @@ export class ConfigureFormComponent {
       console.log('Online Session Subscribe - Items changed:', onlineSession);
       this.items = Object.assign([], onlineSession.procesar.items);
       this.customFields = Object.assign([], onlineSession.procesar.customFields);
+      this.editionFields = Object.assign([], onlineSession.procesar.editionFields);
       if (!this.registrar) {
         this.processFormGroup.patchValue(onlineSession.procesar);
       }
@@ -92,11 +100,35 @@ export class ConfigureFormComponent {
     this.processFormGroup.get('customFields')?.reset();
   }
 
+  addEditionField() {
+    if (this.editionFields.length === 3) {
+      alert('Cannot add more than 3 edition fields.')
+      return;
+    }
+    if (this.editionFields.find(field => (field.key === this.processFormGroup.get('editionFields')?.value.key))) {
+      alert('Key alredy registrered into other edition field.')
+      return;
+    }
+    console.log('Add Edition Field - Edition Field:', this.processFormGroup.get('editionFields')?.value);
+    const newEditionField = this.processFormGroup.get('editionFields')?.value as ICustomField;
+    console.log('Add Edition Field - New Edition Field:', newEditionField);
+    this.editionFields.push(newEditionField);
+    this.store.dispatch(setEditionFields({ editionFields: this.editionFields }));
+    this.processFormGroup.get('editionFields')?.reset();
+  }
+
   deleteCustomField(customField: ICustomField) {
     this.customFields = this.customFields.filter(field => {
       return field.key != customField.key;
     });
     this.store.dispatch(setCustomFields({ customFields: this.customFields }));
+  }
+
+  deleteEditionField(editionField: ICustomField) {
+    this.editionFields = this.editionFields.filter(field => {
+      return field.key != editionField.key;
+    });
+    this.store.dispatch(setEditionFields({ editionFields: this.editionFields }));
   }
 
   getValue(key: string): string {

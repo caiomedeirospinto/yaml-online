@@ -9,6 +9,8 @@ import { DialogElementDetail } from './dialog-element-detail/dialog-element-deta
 import { CustomItemService } from '../services/custom-item.service';
 import { IOnlineSesion } from '../models/online-sesion';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DialogElementLocalEditionComponent } from './dialog-element-local-edition/dialog-element-local-edition.component';
+import { FeatureTogglesService } from '../services/feature-toggles.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,7 +26,8 @@ export class DashboardComponent {
       items: [],
       idField: '',
       nameField: '',
-      customFields: []
+      customFields: [],
+      editionFields: []
     }
   };
   baseColumns: string[] = ['id', 'name'];
@@ -37,6 +40,7 @@ export class DashboardComponent {
     private store: Store<{ onlineSession: IOnlineSesion }>,
     private customItemService: CustomItemService,
     private snackBar: MatSnackBar,
+    public featureService: FeatureTogglesService,
     public dialog: MatDialog
   ) {
     this.procesar$ = store.select('onlineSession');
@@ -70,9 +74,17 @@ export class DashboardComponent {
     this.dialog.open(DialogElementDetail, { width: '640px', data: { data: element, procesar: this._onlineSession.procesar }});
   }
 
+  openLocalEdit(element: any) {
+    this.dialog.open(DialogElementLocalEditionComponent, { width: '640px', data: { data: element, procesar: this._onlineSession.procesar }});
+  }
+
   goToHome() {
     this.snackBar.dismiss();
     this.store.dispatch(clean());
     this.router.navigate([""]);
+  }
+
+  isLocalEditionEnabled() {
+    return this.featureService.isEnabled('localEdition') && this._onlineSession.procesar.editionFields.length > 0;
   }
 }
