@@ -1,0 +1,37 @@
+# General configuration
+nameOverride: &nameOverride yaml-online
+
+partOf: &partOf yaml-online
+
+repository: &repository
+  url: https://github.com/caiomedeirospinto/yaml-online.git
+  ref: develop
+  path: ./
+
+healthcheck: &healthcheck
+  httpGet:
+    path: /
+  initialDelaySeconds: 10
+  periodSeconds: 3
+
+# Deployment as code con estrategia Serverless
+serverless:
+  servicePort: 8080
+  nameOverride: *nameOverride
+  partOf: *partOf
+  repository: *repository
+  runtime:
+    name: nginx
+    version: 1.18-ubi8
+  readinessProbe: *healthcheck
+  livenessProbe: *healthcheck
+  resources:
+    limits:
+      cpu: 200m
+      memory: 200Mi
+    requests:
+      cpu: 50m
+      memory: 50Mi
+
+# Pipeline as code
+# ci-cd:
