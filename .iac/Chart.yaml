@@ -7,4 +7,4 @@ appVersion: 1.16.0
 dependencies:
 - name: serverless
   version: "0.1.0"
-  repository: "https://nexus-nexus.apps.cluster-46e0.46e0.sandbox1008.opentlc.com/repository/helm-charts/"
+  repository: "https://nexus-nexus.apps.cluster-735c.735c.sandbox1478.opentlc.com/repository/helm-charts/"
