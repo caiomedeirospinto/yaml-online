@@ -1,8 +1,8 @@
 <div fxLayout="row wrap"  fxLayoutAlign="space-around" fxFlexFill>
   <div fxLayout="column" class="mt-2">
-    <h2>Start a new process</h2>
+    <h2>Start new process</h2>
     <mat-vertical-stepper linear="true" class="procesar-stepper" #stepper>
-      <mat-step editable="false" [stepControl]="registerFormGroup">
+      <mat-step editable="false" [stepControl]="registerFormGroup" color="warn">
         <form [formGroup]="registerFormGroup" novalidate>
           <ng-template matStepLabel>Fill out your YAML URL repository</ng-template>
           <mat-form-field class="form-field-full-width">
